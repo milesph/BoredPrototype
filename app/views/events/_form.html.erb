@@ -55,7 +55,7 @@
   			<% check_id = get_check_id(c[0]) %>
   			<li class="cat-radio">
     			<%= label_tag check_id, c[0], { :class => 'cat-button'} %>
-				<%= check_box_tag "event[categories]", c[1], false, {:class=>'cat-check', :id => check_id }%>
+				<%= check_box_tag "event[categories][]", c[1], false, {:class=>'cat-check', :id => check_id }%>
   			</li>
 		<% end %>
 	</ul>
