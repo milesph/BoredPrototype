@@ -30,4 +30,20 @@ module EventsHelper
   def get_check_id(name)
     'check-' + name.downcase
   end
+
+  def cat_to_array(categories)
+    # Takes an event's category string as stored in the database and returns
+    # an array where each element is the category number (type string)
+    categories.split(',')
+  end
+
+  def get_cat_classes(categories)
+    # Takes an event's category string as stored in the database and returns
+    # a correct css class string with the cat-# css classes
+    cat_classes = ''
+    categories.split(',').each do |c|
+      cat_classes += 'cat-' + c + ' '
+    end
+    return cat_classes[0..-2]
+  end
 end
