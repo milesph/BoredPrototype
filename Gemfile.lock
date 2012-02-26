@@ -1,6 +1,4 @@
-
-<!-- saved from url=(0098)https://raw.github.com/ACMCMU/BoredPrototype/e37b0af8014ff8be7233244b857bd0b27fe1e976/Gemfile.lock -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">GEM
+GEM
   remote: http://rubygems.org/
   specs:
     actionmailer (3.1.0)
@@ -121,4 +119,3 @@ DEPENDENCIES
   sass-rails (~&gt; 3.1.0)
   sqlite3
   turn
-</pre></body></html>
