@@ -62,6 +62,12 @@ class EventsController < ApplicationController
       @event.categories = params[:event][:categories].join(",")
     end
 
+    # Ensure end time/date if after start time/date
+    if params[:start_time_date] > params[:end_time_date]
+      flash[:error] = 'Your event cannot begin after it ends'
+      @event.errors.add :end_time, "Please ensure that the event end time is after start time"
+    end
+
     respond_to do |format|
       if @event.errors.empty? and @event.save 
         format.html { redirect_to :action => 'index' }
