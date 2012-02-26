@@ -116,11 +116,11 @@ class Event < ActiveRecord::Base
   end
   
   def is_this_week?
-	self.event_start.cweek === Date.today.cweek
+	self.event_start.to_date.cweek === Date.today.cweek
   end
   
   def is_next_week?
-	self.event_start.cweek === (Date.today.cweek + 1)
+	self.event_start.to_date.cweek === (Date.today.cweek + 1)
   end
   
   def is_this_month?
