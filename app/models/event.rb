@@ -104,6 +104,48 @@ class Event < ActiveRecord::Base
   def decline_event
     self.approval_rating = -1
   end
+  
+  
+  #event timebins
+  def is_today?
+	self.event_start.day === (Date.today.day) and is_this_week? and is_this_year?
+  end
+  
+  def is_tomorrow?
+	self.event_start.day === (Date.today.day + 1)
+  end
+  
+  def is_this_week?
+	self.event_start.cweek === Date.today.cweek
+  end
+  
+  def is_next_week?
+	self.event_start.cweek === (Date.today.cweek + 1)
+  end
+  
+  def is_this_month?
+	self.event_start.month == Date.today.month and is_this_year?
+  end
+  
+  def is_next_month?
+	self.event_start.month == (Date.today.month + 1) and is_this_year?
+  end
+  
+  def is_this_year?
+	self.event_start.year == Date.today.year
+  end
+  
+  def date_class_string
+	s = ""
+	s = " today" if is_today?
+	s = s + " tomorrow" if is_tomorrow?
+	s = s + " this_week" if is_this_week?
+	s = s + " next_week" if is_next_week?
+	s = s + " this_month" if is_this_month?
+	s = s + " next_month" if is_next_month?
+	s = s + " this_year" if is_this_year?
+	s
+  end
 
   private
 
