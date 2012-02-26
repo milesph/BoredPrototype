@@ -55,9 +55,9 @@ class EventsController < ApplicationController
     # Limiting the number of categories to 2
     # params[:event][:categories] contains an array where each category (represented as a number)
     #   is an element
-    if params[:event][:categories].size > 2
-      flash[:error] = 'Only up to two categories may be selected'
-      @event.errors.add :categories, "Please do not select more than two categories"
+    if params[:event][:categories].nil? or params[:event][:categories].size > 2
+      flash[:error] = 'You must select between zero and two categories'
+      @event.errors.add :categories, 'You must select between zero and two categories'
     else
       @event.categories = params[:event][:categories].join(",")
     end
