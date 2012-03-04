@@ -48,8 +48,9 @@ class EventsController < ApplicationController
       flash[:error] = 'You must give a date'
       @event.errors.add :start_time, "You need to input a date"
     else
-      @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
-      @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])      
+      @event.start_time = @event.merge_times(params[:start_time_date], params[:event][:start_time])
+      @event.end_time = @event.merge_times(params[:end_time_date], params[:event][:end_time])
+      @event.add_event_times
     end
 
     # Limiting the number of categories to 2
