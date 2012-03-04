@@ -44,23 +44,19 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
 
-    if params[:start_time_date].empty? or params[:end_time_date].empty?
-      flash[:error] = 'You must give a date'
-      @event.errors.add :start_time, "You need to input a date"
-    else
-      @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
-      @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])      
-    end
-
-    # Limiting the number of categories to 2
-    # params[:event][:categories] contains an array where each category (represented as a number)
-    #   is an element
-    if params[:event][:categories].size > 2
-      flash[:error] = 'Only up to two categories may be selected'
-      @event.errors.add :categories, "Please do not select more than two categories"
-    else
+    if (!params[:event][:categories].nil?)
       @event.categories = params[:event][:categories].join(",")
     end
+    
+    if (!params[:event][:start_time].nil? and !params['start_time_date'].nil?)
+      @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
+    end
+
+    if (!params[:event][:end_time].nil? and !params['end_time_date'].nil?)
+      @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])
+    end
+
+    @event.check_invariants
 
     respond_to do |format|
       if @event.errors.empty? and @event.save 

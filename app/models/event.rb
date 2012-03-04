@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
 
   before_save :add_event_times
 
-  before_validation :check_empty_dates
+  before_validation :check_invariants
  
 
 
@@ -103,6 +103,39 @@ class Event < ActiveRecord::Base
 
   def decline_event
     self.approval_rating = -1
+  end
+
+  # This function checks the current invariants for the event.
+  # If any of the invariants are not satisfied, then it returns
+  # false and adds an appropriate error to the errors array in 
+  # the current event.  Otherwise, it returns true.
+  #
+  # the current invariants for events are as follows:
+  # 1. The start and end date and time are not empty
+  # 2. The number of catagories is <= 2
+  # 3. The number of categories is > 0
+  def check_invariants
+    validEvent = true
+
+    # This block checks if the start and end times are empty
+    if :start_time_date.empty? or :end_time_date.empty?
+      errors.add :start_time, "Please input a date"
+      validEvent = false
+    end
+    
+    # This block checks if the number of categories is > 2
+    if !categories.nil? and categories.split(',').size > 2
+      errors.add :categories, "Please do not select more than two categories"
+      validEvent = false
+    end
+
+    # This block checks if the number of categories is <= 0
+    if categories.nil? or categories.empty?
+      errors.add :categories, "Please select a category"
+      validEvent = false
+    end
+
+    return validEvent
   end
 
   private
