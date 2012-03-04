@@ -17,12 +17,16 @@ div {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
-  display: table; }
+  background-color: #8C0F2E;
+  color: #ffffff;
+  font-weight: bold;
+  display: table; 
+  list-style-type: none;}
 
 #error_explanation {
+//  list-style-type: none;	
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid #8C0F2E;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
@@ -34,8 +38,11 @@ div {
     font-size: 12px;
     margin: -7px;
     margin-bottom: 0px;
-    background-color: #c00;
+    background-color: #8C0F2E;
     color: #fff; }
+  ul {
+    padding: 10px 10px 10px 20px;}
   ul li {
     font-size: 12px;
-    list-style: square; } }
+    list-style-type: square; 
+    } }

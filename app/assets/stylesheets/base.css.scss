@@ -8,7 +8,7 @@ $header_height: 120px;
 
 body {
   background: #F0F0F0 url(/images/bg.png);
-  color: #111;  
+  color: #111;  img 
   font-family: 'Helvetica Neue', 'Helvetica', arial, sans-serif;
   font-size: 15px;
   line-height: 1em;
@@ -20,14 +20,17 @@ body {
 	z-index: 5;
 	
 	#hMenu {
+	
+		letter-spacing: 1px;
 		display: inline-block;
 		font-size: 12px;
-		background: #CCC;
+//		background: #CCC;
 		padding: 0px 12px;
 		position: relative; top: -9px;
 		margin-left: 20px;
-		-webkit-border-radius: 6px;
-		box-shadow: inset 0px 1px 1px #333;
+		//-webkit-border-radius: 6px;
+		//-moz-border-radius: 6px;
+		//box-shadow: inset 0px 1px 1px #333;
 			
 		li {
 			display: inline-block;
@@ -59,6 +62,10 @@ body {
     -webkit-animation-duration: $animation_length;
     -webkit-animation-timing-function: ease-in;
     -webkit-animation-iteration-count: 1;
+    -moz-animation-name: reset, fade-in;
+    -moz-animation-duration: $animation_length;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-iteration-count: 1;
   
 }
 
@@ -83,13 +90,19 @@ body {
 }
 }
  
-#a {-webkit-animation-delay: 0, 0;}
-#b {-webkit-animation-delay: 0, $animation_length*0.2;}
-#c {-webkit-animation-delay: 0, $animation_length*0.4;}
-#d {-webkit-animation-delay: 0, $animation_length*0.6;}
-#e {-webkit-animation-delay: 0, $animation_length*0.75;}
+#a {-webkit-animation-delay: 0, 0;
+    -moz-animation-delay: 0, 0;}
+#b {-webkit-animation-delay: 0, $animation_length*0.2;
+    -moz-animation-delay: 0, $animation_length*0.2;}
+#c {-webkit-animation-delay: 0, $animation_length*0.4;
+    -moz-animation-delay: 0, $animation_length*0.4;}
+#d {-webkit-animation-delay: 0, $animation_length*0.6;
+    -moz-animation-delay: 0, $animation_length*0.6;}
+#e {-webkit-animation-delay: 0, $animation_length*0.75;
+    -moz-animation-delay: 0, $animation_length*0.75;}
 
 .container {
 	display: block;
 	padding: 30px;
+	
 }
