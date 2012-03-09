@@ -150,13 +150,11 @@ $event_expanded_zindex: 900;
 }
 
 
+
 /* CREATE AN EVENT */
 
 .container#cEvent, .event-form {
 	
-	width: 850px;
-	margin: 0 auto;
-
 	h1 {
 		font-size: 25px;
 		font-weight: bold;
@@ -190,7 +188,7 @@ $event_expanded_zindex: 900;
 	}
 
 	div.actions {
-		width: 100%;
+		width: 60%;
 		float: left;
 		text-align: center;
 		margin-top: 25px;
