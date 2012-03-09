@@ -74,6 +74,16 @@ class Event < ActiveRecord::Base
     self.event_end = get_datetime_from_time_string(self.end_time)
   end
 
+  def add_event_start_time
+    puts self.start_time
+    self.event_start = get_datetime_from_time_string(self.start_time)
+  end
+
+  def add_event_end_time
+    puts self.end_time
+    self.event_end = get_datetime_from_time_string(self.end_time)
+  end
+
   def edit_start_date
     if self.start_time.nil?
       return Time.now.strftime('%m/%d/%Y')
