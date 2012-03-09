@@ -171,13 +171,18 @@ class Event < ActiveRecord::Base
 
     # This block checks if the start and end times are empty
     if :start_time_date.empty? or :end_time_date.empty?
-      errors.add :start_time, "Please input a date"
+      errors.add :start_time, "Please input a date."
       validEvent = false
     end
     
     # This block checks if the number of categories is > 2
     if !categories.nil? and categories.split(',').size > 2
-      errors.add :categories, "Please do not select more than two categories"
+      errors.add :categories, "Please do not select more than two categories."
+      validEvent = false
+    end
+
+    if (self.start_time > self.end_time)
+      errors.add :start_time, "should be before the end time."
       validEvent = false
     end
 
