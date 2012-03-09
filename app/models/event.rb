@@ -181,12 +181,6 @@ class Event < ActiveRecord::Base
       validEvent = false
     end
 
-    # This block checks if the number of categories is <= 0
-    if categories.nil? or categories.empty?
-      errors.add :categories, "Please select a category"
-      validEvent = false
-    end
-
     return validEvent
   end
 
