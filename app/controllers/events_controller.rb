@@ -50,10 +50,12 @@ class EventsController < ApplicationController
     
     if (!params[:event][:start_time].nil? and !params['start_time_date'].nil?)
       @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
+      @event.add_event_start_time
     end
 
     if (!params[:event][:end_time].nil? and !params['end_time_date'].nil?)
       @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])
+      @event.add_event_end_time
     end
 
     @event.check_invariants
