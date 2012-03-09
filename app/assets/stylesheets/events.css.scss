@@ -22,20 +22,27 @@ $event_height: 200px;
 $event_caption_offset: -27px;
 $event_expanded_zindex: 900;
 
-.leftCol { 
-	width: 26%; float: left;
-	margin-right: 30px;
-	-moz-box-sizing:    border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing:        border-box;
+
+
+div.container#allevents {
+	width: 60%;
+	margin: auto auto;
+
+}
+
+.leftCol {
+	width: 50%; 
+	display: inline;
+	//margin-right: 30px;
+	//-moz-box-sizing:    border-box;
+	//-webkit-box-sizing: border-box;
+	//box-sizing:        border-box;
 }
 
 #events-container { 
-	width: 70%; 
-	float: left; 
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+	width: 100%; 
+	display: inline-table;
+	margin: auto auto;
 }
 
 .category-list {
@@ -121,8 +128,8 @@ $event_expanded_zindex: 900;
 	border: 1px solid #555;
 	box-shadow: 4px 4px 0px #888;
   
-  width: $event_width;
-  height: $event_height;
+  width: 30%;
+  height: 100px;
   
   h4 {
     font-size: 1.5em;
@@ -153,13 +160,16 @@ $event_expanded_zindex: 900;
 
 /* CREATE AN EVENT */
 
+
 .container#cEvent, .event-form {
-	
+		  width: 80%;
+		  margin: auto auto; 
+
 	h1 {
 		font-size: 25px;
 		font-weight: bold;
-		border-bottom: 1px dotted #777;
-		width: 590px; padding: 10px 0px 18px 0px;
+		border-bottom: 1px dashed #777;
+		width: 100%; padding: 10px 0px 18px 0px;
 		margin-bottom: 25px; }
 		
 	.form-info input, .form-info textarea {
@@ -174,22 +184,23 @@ $event_expanded_zindex: 900;
 	}
 	
 	.form-info {
-		width: 550px;
-		float: left;
+		width: 70%;
+
+		display: inline;
 		label {
 			display: inline-block; width: 110px;
-			text-align: right; padding: 10px; 
-			float: left; }
+			text-align: right; padding: 10px; float: left;
+			}
 		textarea {
 			height: 150px; }
 
 		input.datepicker {
-			width: 230px; }
+			width: 200px; }
 	}
 
 	div.actions {
-		width: 60%;
-		float: left;
+		width: 100%;
+		display: block;
 		text-align: center;
 		margin-top: 25px;
 		border-top: 1px dashed #999;
@@ -220,14 +231,15 @@ $event_expanded_zindex: 900;
 	}
 	
 	.event-categories {
-		float: left;
-		width: 300px;
+		display: inline-block;	
+		width: 25%;
+
 		ul {
 			margin-top: 25px; }
 		li {
 			list-style-type: none;
 			width: 200px;
-			float: left;
+			display: block; //float: left;
 		}
 	}
 	

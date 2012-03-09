@@ -5,13 +5,14 @@
   <link href='http://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
+  <%= render "shared/header" %>
 </head>
 <body>
-<%= render "shared/header" %>
+
 
 <%= yield %>
-
-<%= javascript_include_tag "application" %>
 <%= render "layouts/footer" %>
+<%= javascript_include_tag "application" %>
+
 </body>
 </html>
