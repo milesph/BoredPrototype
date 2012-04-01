@@ -46,7 +46,7 @@ $(function() {
   });
 
 	/* HAROLD'S CODE DO NOT INSULT */
-	$('ul.category-list').click(function(e){
+/*	$('ul.category-list').click(function(e){
 		if ( $(this).hasClass('expanded') ){
 			var liPosition = $(e.target).position();
 			$('li', this).css('top', -liPosition.top);
@@ -57,7 +57,7 @@ $(function() {
 			$(this).toggleClass('expanded');
 			$('.events-col-info').toggle();
 		}
-	});
+	});*/
 });
 
 $('.field input').focus(function(){

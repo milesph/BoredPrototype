@@ -1,12 +1,13 @@
 <div class="container" id="allevents">	
-	<div class="leftCol">
-		<!--<ul id="category-list" class="category-list">
-		 
-			<li class="active">Hot Events &#8595;</li>
+	<ul id="category-list" class="category-list">
+			<li class="active">Hot Events</li>
 			<% EventsHelper::all_categories.each do |c| %>
 		    	<li><%= c[0] %></li>
 		  	<% end %>
-		</ul>-->
+	</ul>
+	<br />
+	<div class="leftCol">
+	
 
 		<div class="events-col-info">
 			<h2>Click an event to see details &rarr;</h2>
@@ -23,7 +24,7 @@
 	
 	<div id="events-container">
 		<% Event.where(":time_now <= :time_end", {:time_now=>Time.now, :time_end=>:event_end}).each do |event| %>
-			<%= render event %>
+		<%= render event %>
 		<% end %>
 	</div>
 

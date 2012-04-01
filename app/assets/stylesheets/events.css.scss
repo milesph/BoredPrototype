@@ -26,15 +26,15 @@ $event_expanded_zindex: 900;
 
 div.container#allevents {
 	width: 90%;
-	margin: auto auto;
+	margin: auto auto auto auto;
 
 }
 
 .leftCol {
-	width: 25%; 
+	width: 23%; 
 	position: fixed;
-	display: inline;
-	float: left;
+	display: inline;	
+	//float: right;
 
 	//margin-right: 30px;
 	//-moz-box-sizing:    border-box;
@@ -50,13 +50,34 @@ div.container#allevents {
 	display: inline-table;
 	padding: 20px;
 	border-left: 2px dotted #888;
-
 }
 
+
+
 .category-list {
+	list-style-type: none;
+//	border: 2px solid black;
+	text-align:center;
+	padding-bottom: 20px;
+	li {
+	 display: inline-table;
+	 width: 100px;
+	 font-size: 17px; 
+	 font-weight: bold;
+	 padding: 8px;
+	 letter-spacing: 1px;
+	 &:hover {
+		background: #888;
+		color: white;
+		text-shadow: 0px 1px 1px #000;
+		cursor: pointer; }
+	}
+
+/* OLD CODE */
+/*	margin-bottom: 20px;
 	position: relative;
 	list-style-type: none;
-	width: 100%; height: 45px;
+	width: 20%; height: 45px;
 	font-size: 25px; font-weight: bold;
 	letter-spacing: -1px;
 	border: 1px solid #BBB;
@@ -87,12 +108,14 @@ div.container#allevents {
 	}
 
 	&:active {
-		overflow: hidden; }
+		overflow: hidden; }*/
 }
 
+/* OLD CODE */
+/*
 .category-list.expanded {
 	overflow: visible; height: auto;
-}
+}*/
 
 .events-col-info {
 	position: relative;
