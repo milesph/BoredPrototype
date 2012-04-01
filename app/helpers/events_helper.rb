@@ -46,4 +46,33 @@ module EventsHelper
     end
     return cat_classes[0..-2]
   end
+
+  #Turns an array, even a nested one, from Ruby to Javascript
+  def nested_array_to_javascript(option)
+  	retVal = ""
+
+  	if option.kind_of?(Array)
+  		retVal += "["
+  		option.each do |elem|
+  			retVal += nested_array_to_javascript(elem)
+  			retVal += ","
+  		end
+
+  		#Remove last comma from retVal
+  		retVal = retVal[0...-1]
+
+  		retVal += "]"
+  	end
+
+  	if option.kind_of?(String)
+  		retVal += "\"" + option + "\""
+  	end
+
+  	if option.kind_of?(Integer)
+  		retVal += option.to_s()
+  	end
+
+  	return retVal
+  end
+  
 end
