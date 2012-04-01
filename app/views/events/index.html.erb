@@ -1,13 +1,13 @@
 <div class="container" id="allevents">	
 	<div class="leftCol">
-		<!--<ul id="category-list" class="category-list">
+		<ul id="category-list" class="category-list">
 		 
 			<li class="active">Hot Events &#8595;</li>
 			<% EventsHelper::all_categories.each do |c| %>
 		    	<li><%= c[0] %></li>
 		  	<% end %>
-		</ul>-->
-<!--
+		</ul>
+
 		<div class="events-col-info">
 			<h2>Click an event to see details &rarr;</h2>
 			<div class="info-main">
@@ -18,12 +18,20 @@
 		
 				<p id="info-desc"></p>
 		  	</div>
-		</div>-->
+		</div>
 	</div>
 	
 	<div id="events-container">
-		<% Event.where(":time_now <= :time_end", {:time_now=>Time.now, :time_end=>:event_end}).each do |event| %>
+		<!--<% Event.where(":time_now <= :time_end", {:time_now=>Time.now, :time_end=>:event_end}).each do |event| %>
 			<%= render event %>
+		<% end %>-->
+		    <p><%= Time.now.to_time %></p>
+		<% @events.each do |event| %>
+		     <p><%= event.event_end.to_time %></p>
+		      <p><%= Time.now.to_time <= event.event_end.to_time %></p>
+		    <% if Time.now.to_date <= event.event_end.to_date %>
+		        <%= render event %>
+		    <% end %>
 		<% end %>
 	</div>
 
