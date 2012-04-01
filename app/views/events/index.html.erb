@@ -7,7 +7,7 @@
 		    	<li><%= c[0] %></li>
 		  	<% end %>
 		</ul>-->
-<!--
+
 		<div class="events-col-info">
 			<h2>Click an event to see details &rarr;</h2>
 			<div class="info-main">
@@ -18,11 +18,11 @@
 		
 				<p id="info-desc"></p>
 		  	</div>
-		</div>-->
+		</div>
 	</div>
 	
 	<div id="events-container">
-		<% Event.where(":time_now <= :time_end", {:time_now=>Time.now, :time_end=>:event_end}).each do |event| %>
+		<% Event.where("event_end >= :time_now", {:time_now=>Time.now}).each do |event| %>
 			<%= render event %>
 		<% end %>
 	</div>
