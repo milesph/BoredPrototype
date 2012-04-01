@@ -45,31 +45,7 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 	#@event.user = current_user
 
-    if (!params[:event][:categories].nil?)
-      @event.categories = params[:event][:categories].join(",")
-    end
-    
-    if (!params[:event][:start_time].nil? and !params['start_time_date'].nil?)
-      @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
-      @event.add_event_start_time
-    end
-
-    if (!params[:event][:end_time].nil? and !params['end_time_date'].nil?)
-      @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])
-      @event.add_event_end_time
-    end
-
-    @event.check_invariants
-
-    respond_to do |format|
-      if @event.errors.empty? and @event.save 
-        format.html { redirect_to :action => 'index' }
-        format.json { render json: @event, status: :created, location: @event }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+    editEvent(@event, params)
   end
 
   # PUT /events/1
@@ -77,21 +53,50 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
-    if params[:start_time_date].empty? or params[:end_time_date].empty?
-      flash[:error] = 'You must give a date'
-      @event.errors.add :start_time, "You need to input a date"
-    else
-      @event.start_time = @event.merge_times(params['start_time_date'], params[:event][:start_time])
-      @event.end_time = @event.merge_times(params['end_time_date'], params[:event][:end_time])      
+    # Note: this block is designed to zero out the categories,
+    # start and end times, and put the rest of the variables
+    # equal to what the inputted parameters are.  If you
+    # can think of a better way do implement this, please do.
+    @event.categories = nil
+    @event.start_time = nil
+    @event.end_time = nil
+    @event.name = params[:event][:name]
+    @event.description = params[:event][:description]
+    @event.location = params[:event][:location]
+    @event.categories = params[:event][:categories]
+    @event.event_start = params[:event][:event_start]
+    @event.event_end = params[:event][:event_end]
+
+    editEvent(@event, params)
+  end
+
+  # This event takes in an initialized event (event) and a list of parameters (params),
+  # checks the invariants of the event, and then either creates it if it is
+  # valid or returns an error if it is not.
+  def editEvent(event, params)
+    if (!params[:event][:categories].nil?)
+      event.categories = params[:event][:categories].join(",")
+    end
+    
+    if (!params[:event][:start_time].nil? and !params['start_time_date'].nil?)
+      event.start_time = event.merge_times(params['start_time_date'], params[:event][:start_time])
+      event.add_event_start_time
     end
 
+    if (!params[:event][:end_time].nil? and !params['end_time_date'].nil?)
+      event.end_time = event.merge_times(params['end_time_date'], params[:event][:end_time])
+      event.add_event_end_time
+    end
+
+    event.check_invariants
+
     respond_to do |format|
-      if @event.errors.empty? and @event.update_attributes(params[:event])
-        format.html { redirect_to :action => 'index', notice: 'Event was successfully updated.' }
-        format.json { head :ok }
+      if event.errors.empty? and event.save 
+        format.html { redirect_to :action => 'index' }
+        format.json { render json: event, status: :created, location: event }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: event.errors, status: :unprocessable_entity }
       end
     end
   end

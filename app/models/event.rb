@@ -168,6 +168,10 @@ class Event < ActiveRecord::Base
   # 1. The start and end date and time are not empty
   # 2. The number of catagories is <= 2
   # 3. The number of categories is > 0
+  # 4. The start time is before or equal to the end time
+  # 5. All of the variables exist
+  #
+  # Note: If you edit this function, please edit the spec above as well
   def check_invariants
     validEvent = true
 
@@ -183,8 +187,45 @@ class Event < ActiveRecord::Base
       validEvent = false
     end
 
+    # This block checks if the start time is greater than the end time
     if (self.start_time > self.end_time)
       errors.add :start_time, "should be before the end time."
+      validEvent = false
+    end
+
+    # This block checks if the name field exists
+    if (self.name.nil?)
+      errors.add :name, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if the description field exists
+    if (self.description.nil?)
+      errors.add :description, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if the location field exists
+    if (self.location.nil?)
+      errors.add :location, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if the approval_rating field exists
+    if (self.approval_rating.nil?)
+      errors.add :approval_rating, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if the event_start field exists
+    if (self.event_start.nil?)
+      errors.add :event_start, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if the event_end field exists
+    if (self.event_end.nil?)
+      errors.add :event_end, "should not be empty."
       validEvent = false
     end
 
