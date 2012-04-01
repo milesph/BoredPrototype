@@ -1,6 +1,8 @@
 include ActionView::Helpers::DateHelper
 
 class Event < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :organization
   validates_presence_of :name, :description, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
   validates_size_of :location, :maximum => 100
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/

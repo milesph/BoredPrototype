@@ -13,6 +13,10 @@
   <% end %>
 	
 	<fieldset class="form-info">
+		<div class="field">
+    		<%= f.label :organization %>
+    		<%= f.collection_select :organization_id, Organization.all, :id, :name  %>
+  		</div>
 		
   		<div class="field">
     		<%= f.label :name %>

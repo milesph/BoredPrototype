@@ -43,6 +43,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(params[:event])
+	#@event.user = current_user
 
     if (!params[:event][:categories].nil?)
       @event.categories = params[:event][:categories].join(",")

@@ -1,4 +1,8 @@
 Teudu::Application.routes.draw do
+  resources :organizations
+
+  resources :users
+
   get "approval/approve"
 
   get "approval/decline"
