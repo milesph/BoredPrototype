@@ -22,7 +22,13 @@ $event_height: 200px;
 $event_caption_offset: -27px;
 $event_expanded_zindex: 900;
 
-
+.noevent {
+	 text-align: center; 
+	 margin:auto auto; 
+	 width: 50%; 
+	 line-height: 150%; 
+	 letter-spacing: 1px;
+}
 
 div.container#allevents {
 	width: 90%;
@@ -30,26 +36,34 @@ div.container#allevents {
 
 }
 
-.leftCol {
-	width: 23%; 
-	position: fixed;
-	display: inline;	
-	//float: right;
+#noevent {
+	 margin: auto auto;
+	 width: 200px;
+	 border: 2px solid black;
+}
 
-	//margin-right: 30px;
-	//-moz-box-sizing:    border-box;
-	//-webkit-box-sizing: border-box;
-	//box-sizing:        border-box;
+.leftCol {
+	margin-right: 30px;
+	position: fixed;
+	z-index: 999;
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
 	padding-top: 20px;
 
 }
 
 #events-container { 
-	float: right;
-	width: 70%; 
-	display: inline-table;
-	padding: 20px;
+	//float: left;
+	//width: 70%; 
+	//display: inline-table;
+	padding-left: 20px;
 	border-left: 2px dotted #888;
+	margin-left: 250px;
+	margin-bottom: 50px;
+	#event {
+	float: left;
+	}
 }
 
 
