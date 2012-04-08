@@ -22,9 +22,9 @@ $event_height: 200px;
 $event_caption_offset: -27px;
 $event_expanded_zindex: 900;
 
-.noevent {
+.paragraphtext {
 	 text-align: center; 
-	 margin:auto auto; 
+	 margin:20px auto 0px auto; 
 	 width: 50%; 
 	 line-height: 150%; 
 	 letter-spacing: 1px;
@@ -32,8 +32,7 @@ $event_expanded_zindex: 900;
 
 div.container#allevents {
 	width: 90%;
-	margin: auto auto auto auto;
-
+	margin: auto auto;
 }
 
 #noevent {
@@ -54,9 +53,6 @@ div.container#allevents {
 }
 
 #events-container { 
-	//float: left;
-	//width: 70%; 
-	//display: inline-table;
 	padding-left: 20px;
 	border-left: 2px dotted #888;
 	margin-left: 250px;
@@ -70,7 +66,6 @@ div.container#allevents {
 
 .category-list {
 	list-style-type: none;
-//	border: 2px solid black;
 	text-align:center;
 	padding-bottom: 20px;
 	li {

@@ -6,6 +6,8 @@ Teudu::Application.routes.draw do
   resources :events
 
   match 'approval' => 'approval#index'
+  match 'about', :to => 'pages#about'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
