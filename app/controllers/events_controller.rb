@@ -44,6 +44,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
 
+    @event.save
+    
     editEvent(@event, params)
   end
 

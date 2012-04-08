@@ -168,6 +168,7 @@ class Event < ActiveRecord::Base
   # 3. The number of categories is > 0
   # 4. The start time is before or equal to the end time
   # 5. All of the variables exist
+  # 6. There is not a duplicate event in the database
   #
   # Note: If you edit this function, please edit the spec above as well
   def check_invariants
@@ -224,6 +225,12 @@ class Event < ActiveRecord::Base
     # This block checks if the event_end field exists
     if (self.event_end.nil?)
       errors.add :event_end, "should not be empty."
+      validEvent = false
+    end
+
+    # This block checks if there are any duplicate events
+    if (Event.where("location = ? AND start_time = ? AND end_time = ? AND NOT id = ?", self.location, self.start_time, self.end_time, self.id).length >= 1)
+      errors.add :location, "invalid: Cannot be a duplicate event."
       validEvent = false
     end
 
