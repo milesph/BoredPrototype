@@ -24,74 +24,61 @@ $event_expanded_zindex: 900;
 
 
 
-div.container#allevents {
-	width: 60%;
-	margin: auto auto;
-
+#noevent {
+	 margin: auto auto;
+	 width: 200px;
+	 border: 2px solid black;
 }
 
 .leftCol {
-	width: 50%; 
-	display: inline;
-	//margin-right: 30px;
-	//-moz-box-sizing:    border-box;
-	//-webkit-box-sizing: border-box;
-	//box-sizing:        border-box;
+	margin-right: 30px;
+	width: 250px;
+	
+	position: fixed;
+	z-index: 999;
+	-moz-box-sizing:    border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing:        border-box;
+	padding-top: 20px;
 }
 
-#events-container { 
-	width: 100%; 
-	display: inline-table;
-
+#eventscontainer { 
+	float: left;
+	padding-left: 20px;
+	border-left: 2px dotted #888;
+	margin-left: 20px;
+	#event {
+	float: left;
+	}
 }
+
+
 
 .category-list {
-	position: relative;
 	list-style-type: none;
-	width: 100%; height: 45px;
-	font-size: 25px; font-weight: bold;
-	letter-spacing: -1px;
-	border: 1px solid #BBB;
-	overflow: hidden; z-index: 10;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	
+	text-align:center;
+	padding-bottom: 20px;
 	li {
-		position: relative; width: 100%;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-		padding: 15px 12px;
-		background: #DDD;
-		border-bottom: 1px dotted #888;
-		&:hover {
-			background: #888;
-			color: white;
-			text-shadow: 0px 1px 1px #000;
-			cursor: pointer; }
-  	}
-
-	> img {
-		position: absolute;
-		right: 15px; top: 16px;
-		z-index: 10;
+	 display: inline-table;
+	 width: 100px;
+	 font-size: 17px; 
+	 font-weight: bold;
+	 padding: 8px;
+	 letter-spacing: 1px;
+	 &:hover {
+		background: #888;
+		color: white;
+		text-shadow: 0px 1px 1px #000;
+		cursor: pointer; }
 	}
-
-	&:active {
-		overflow: hidden; }
-}
-
-.category-list.expanded {
-	overflow: visible; height: auto;
 }
 
 .events-col-info {
-	position: relative;
+	float: left;
 	font-family: 'News Cycle';
 	padding: 15px;
 	background: rgba(0,0,0,0.65);
-	width: 100%;
+	width: 250px;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -128,8 +115,8 @@ div.container#allevents {
 	border: 1px solid #555;
 	box-shadow: 4px 4px 0px #888;
   
-  width: $event_width;//30%;
-  height: $event_height;//100px;
+  width: $event_width;
+  height: $event_height;
   
   h4 {
     font-size: 1.5em;
@@ -239,7 +226,7 @@ div.container#allevents {
 		li {
 			list-style-type: none;
 			width: 200px;
-			display: block; //float: left;
+			display: block;
 		}
 	}
 	
