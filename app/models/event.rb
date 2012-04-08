@@ -1,10 +1,13 @@
 include ActionView::Helpers::DateHelper
 
 class Event < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :organization
   validates_presence_of :name, :description, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
   validates_size_of :location, :maximum => 100
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/
 
+  
   before_save :add_event_times
 
   before_validation :check_invariants
@@ -22,6 +25,10 @@ class Event < ActiveRecord::Base
   #### PAPERCLIP ####
   has_attached_file :flyer
 
+  #validates_attachment :flyer,
+  #:content_type => { :content_type => "image/jpg" },
+  #:size => { :in => 0..10.kilobytes }
+  
   #### DATA ####
   EVENT_TIMES = ["12:00 am", "00:00"], ["12:30 am", "00:30"], ["1:00 am", "1:00"], ["1:30 am", "1:30"], ["2:00 am", "2:00"], ["2:30 am", "2:30"], ["3:00 am", "3:00"], ["3:30 am", "3:30"], ["4:00 am", "4:00"], ["4:30 am", "4:30"], ["5:00 am", "5:00"], ["5:30 am", "5:30"], ["6:00 am", "6:00"], ["6:30 am", "6:30"], ["7:00 am", "7:00"], ["7:30 am", "7:30"], ["8:00 am", "8:00"], ["8:30 am", "8:30"], ["9:00 am", "9:00"], ["9:30 am", "9:30"], ["10:00 am", "10:00"], ["10:30 am", "10:30"], ["11:00 am", "11:00"], ["11:30 am", "11:30"], ["12:00 pm", "12:00"], ["12:30 pm", "12:30"], ["1:00 pm", "13:00"], ["1:30 pm", "13:30"], ["2:00 pm", "14:00"], ["2:30 pm", "14:30"], ["3:00 pm", "15:00"], ["3:30 pm", "15:30"], ["4:00 pm", "16:00"], ["4:30 pm", "16:30"], ["5:00 pm", "17:00"], ["5:30 pm", "17:30"], ["6:00 pm", "18:00"], ["6:30 pm", "18:30"], ["7:00 pm", "19:00"], ["7:30 pm", "19:30"], ["8:00 pm", "20:00"], ["8:30 pm", "20:30"], ["9:00 pm", "21:00"], ["9:30 pm", "21:30"], ["10:00 pm", "22:00"], ["10:30 pm", "22:30"], ["11:00 pm", "23:00"], ["11:30 pm", "23:30"]
   EVENT_CATEGORIES = %w(Arts Sports Professional Cultural Music Movies Academic Social Service)
@@ -248,4 +255,25 @@ class Event < ActiveRecord::Base
       return true
     end
   end
+  
+  
+  
+  # We can probably get away with letting the user upload something crappy...it is their choice after all
+  def dimensions_fine?
+	  temp_file = flyer.queued_for_write[:original]
+	  unless temp_file.nil?
+		dimensions = Paperclip::Geometry.from_file(temp_file)
+		width = dimensions.width
+		height = dimensions.height
+		
+		if width < 200 && height < 400
+		  errors.add("flyer", "dimensions are too small.  Minimum width: 200px, minimum height: 400px")
+		  puts "flyer not valid"
+		  false
+	    else
+		  true
+		end
+	  end
+	  true
+	end
 end
