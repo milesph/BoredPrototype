@@ -1,10 +1,20 @@
 Teudu::Application.routes.draw do
+  resources :organizations
+
+  resources :users
+  resources :sessions, :only => [:create, :destroy]
+  
   get "approval/approve"
 
   get "approval/decline"
-
+  match 'events/my' => 'events#my'
   resources :events
 
+  match 'sessions', :to => 'sessions#create'
+  match 'logout', :to => 'sessions#destroy'
+  
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  
   match 'approval' => 'approval#index'
   match 'about', :to => 'pages#about'
 
@@ -14,6 +24,7 @@ Teudu::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
+
   match 'events/:id/decline' => 'events#decline'
   match 'events/:id/approve' => 'events#approve'
 
