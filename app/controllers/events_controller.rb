@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events.json
   # GET /events.xml
   def index
-    @events = Event.approved
+    @events = Event.current_approved
 
     respond_to do |format|
       format.html # index.html.erb

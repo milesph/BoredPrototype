@@ -3,8 +3,9 @@ include ActionView::Helpers::DateHelper
 class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
-  validates_presence_of :name, :description, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
+  validates_presence_of :name, :description, :summary, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
   validates_size_of :location, :maximum => 100
+  validates_size_of :summary, :maximum => 300
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/
 
   
@@ -17,7 +18,8 @@ class Event < ActiveRecord::Base
   #### SCOPES ####
   scope :all, order("start_time ASC")
   scope :upcoming, where("start_time >= ?", Time.now)
-  scope :approved, where("approval_rating = ?", 100).order("event_start ASC");
+  scope :approved, where("approval_rating = ?", 100).order("event_start ASC")
+  scope :current_approved, where("event_end >= :time_now and approval_rating == :rating", {:time_now=>Time.now, :rating => 100}).order("event_start ASC")
   scope :awaiting_approval, where("approval_rating = ?", 0)
   scope :approved_upcoming, where("start_time >= ?", Time.now).where("approval_rating = ?", 100)
 

@@ -40,6 +40,7 @@
 				<p id="info-desc"></p>
 		  	</div>
 		</div>
+<<<<<<< HEAD
 	</div>
 	
 	<div id="events-container">
@@ -48,12 +49,16 @@
 <!--	</div> -->
 	<% end %>
 
+=======
+	<!--</div>-->
+>>>>>>> a9b75f365b8c35d47354e932c6596bd181dc9b36
 	
 	<div id="eventscontainer">
-		<% Event.where(":time_now <= :time_end", {:time_now=>Time.now, :time_end=>:event_end}).each do |event| %>
-		<div id ="event"><%= render event %></div>
-		<% end %>
+		<% @events.each do |event| %>
+			<div id ="event"><%= render event %></div>
+			<% end %>
 	</div>
+	<% end %>
 
 </div>
 
