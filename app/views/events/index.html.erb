@@ -22,7 +22,7 @@
 	</div>
 	
 	<div id="events-container">
-		<% Event.where("event_end >= :time_now", {:time_now=>Time.now}).each do |event| %>
+		<% @events.each do |event| %>
 			<%= render event %>
 		<% end %>
 	</div>
