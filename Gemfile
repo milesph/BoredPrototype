@@ -16,6 +16,8 @@ end
 
 gem 'jquery-rails'
 gem 'paperclip', '~>2.4'
+gem "omniauth"
+gem "oa-pubcookie", :git => 'git://github.com/alexcrichton/oa-pubcookie.git'
 
 # Deploy with to Heroku for testing
 # Use postgres for database as Heroku doesn't support sqlite3
@@ -34,5 +36,7 @@ end
 
 group :test do
   # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails', "~> 3.0"
 end

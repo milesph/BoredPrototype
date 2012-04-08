@@ -5,17 +5,26 @@
 	<ul id="hMenu">
 		<li><%= link_to "Home", root_url %></li> |
 		<li><%= link_to "Create an event", new_event_path %></li> |
-		<li><%= link_to "Approval", approval_path %></li> |
-    <li class="right">
-    <% if Event.awaiting_approval.length > 0 %>
-      <% if Event.awaiting_approval.length == 1 %>    Hi Brian, there is an event awaiting approval.
-      <% else %>
-    Hi Brian, there are <%= Event.awaiting_approval.length %> events awaiting approval.
-      <% end %>
-    <% else %>
-      All events have been approved.
-    <% end %>
-		</li>
+		
+		
+	<% if signed_in? %>
+		<% if current_user.can_moderate? %>
+			<li><%= link_to "Approval", approval_path %></li> |
+			<li class="right">
+			<% if Event.awaiting_approval.length > 0 %>
+			  <% if Event.awaiting_approval.length == 1 %>    Hi <%= current_user.name %>, there is an event awaiting approval.
+			  <% else %>
+			Hi <%= current_user.name %>, there are <%= Event.awaiting_approval.length %> events awaiting approval.
+			  <% end %>
+			<% else %>
+			  All events have been approved.
+			<% end %>
+			</li>
+		<% end %>
+		<li><%= link_to "Sign out", logout_path %></li>
+	<% else %>
+		<li><%= link_to "Sign in", sessions_path %></li>
+	<% end %>
 	</ul>
 
 </div>

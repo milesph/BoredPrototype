@@ -1,13 +1,18 @@
-<div class="container" id="allevents">	
-	<div class="leftCol">
-		<!--<ul id="category-list" class="category-list">
-		 
-			<li class="active">Hot Events &#8595;</li>
+<div class="container">	
+  	<% if Event.all.empty? then %>
+	<div class="paragraphtext"> Sorry, there are currently no events. Make a new event by clicking "Create an event" in the menu.</div>
+	<% else %>
+
+	<ul id="category-list" class="category-list">
+			<li class="active">Hot Events</li>
 			<% EventsHelper::all_categories.each do |c| %>
 		    	<li><%= c[0] %></li>
 		  	<% end %>
-		</ul>-->
+	</ul>
+	<br />
 
+
+	<!--<div class="leftCol">	        -->
 		<div class="events-col-info">
 			<h2>Click an event to see details &rarr;</h2>
 			<div class="info-main">
@@ -19,12 +24,13 @@
 				<p id="info-desc"></p>
 		  	</div>
 		</div>
-	</div>
+	<!--</div>-->
 	
-	<div id="events-container">
+	<div id="eventscontainer">
 		<% @events.each do |event| %>
-			<%= render event %>
-		<% end %>
+			<div id ="event"><%= render event %></div>
+			<% end %>
 	</div>
+	<% end %>
 
 </div>
