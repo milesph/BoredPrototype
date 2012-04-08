@@ -16,6 +16,8 @@ Teudu::Application.routes.draw do
   match '/auth/:provider/callback', :to => 'sessions#create'
   
   match 'approval' => 'approval#index'
+  match 'about', :to => 'pages#about'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

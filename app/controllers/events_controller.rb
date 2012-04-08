@@ -56,6 +56,8 @@ class EventsController < ApplicationController
     @event = Event.new(params[:event])
 	#@event.user = current_user
 
+    @event.save
+    
     editEvent(@event, params)
   end
 
