@@ -10,13 +10,13 @@ module EventsHelper
   @@category_hash = {
   "Arts" => 1, 
   "Sports" =>2,
-  "Professional" => 4,
-  "Cultural" => 6,
-  "Music" => 7,
-  "Movies" => 8,
-  "Academic" => 9,
-  "Social" => 10,
-  "Service" => 11
+  "Professional" => 3,
+  "Cultural" => 4,
+  "Music" => 5,
+  "Movies" => 6,
+  "Academic" => 7,
+  "Social" => 8,
+  "Service" => 9
   }
 
   def self.all_categories
@@ -47,6 +47,10 @@ module EventsHelper
     return cat_classes[0..-2]
   end
 
+  def categories_javascript()
+    return nested_array_to_javascript(EventsHelper.all_categories)
+  end
+
   #Turns an array, even a nested one, from Ruby to Javascript
   def nested_array_to_javascript(option)
   	retVal = ""
@@ -65,7 +69,7 @@ module EventsHelper
   	end
 
   	if option.kind_of?(String)
-  		retVal += "\"" + option + "\""
+  		retVal += "\'" + option + "\'"
   	end
 
   	if option.kind_of?(Integer)

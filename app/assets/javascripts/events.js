@@ -66,3 +66,44 @@ $('.field input').focus(function(){
 $('.field input').blur(function(){
   $(this).parent().removeClass('form-focus');
 });
+
+function hide_cat(n){
+	cat_string = ".cat-"+n;
+	$(cat_string).css('display','none');
+}
+
+function show_cat(n){
+	cat_string = ".cat-"+n;
+	$(cat_string).css('display','inline');
+}
+
+//hide all events that have a category
+function hide_all() {	
+	for(var cur_cat in hashCategories)
+	{
+		hide_cat(hashCategories[cur_cat][1]);
+	}
+}
+
+var show_categores = new Array(); //DELETE ME
+show_categories = [1,2,3,4]; //DELETE ME
+
+//Takes an array of categories, cats. Displays only events with those categories,
+//  and hides all others.
+function show_only_cats(cats){
+	hide_all();
+	
+	for(var x in cats){
+		show_cat(x);
+	}
+}
+
+function hide_cat(n){
+	cat_string = ".cat-"+n;
+	$(cat_string).css('display','none');
+}
+
+function show_cat(n){
+	cat_string = ".cat-"+n;
+	$(cat_string).css('display','inline');
+}
