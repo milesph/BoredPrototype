@@ -1,21 +1,30 @@
-<h1>Listing users</h1>
+<div class="container" id="approval">
+<h1>Approved users</h1>
 
 <table>
+	<thead>
   <tr>
-    <th></th>
+	<th>Name</th>
+	<th>Andrew ID</th>
+	<th>Orgs</th>
     <th></th>
     <th></th>
   </tr>
-
+</thead>
+<tbody>
 <% @users.each do |user| %>
   <tr>
-    <td><%= link_to 'Show', user %></td>
+	<td><%= link_to user.name, user %></td>
+	<td><%= link_to user.andrew_id, user %></td>
+	<td><%= user.organizations_string %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Remove', user, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
 
 <%= link_to 'New User', new_user_path %>
+</div>

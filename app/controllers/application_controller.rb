@@ -15,4 +15,10 @@ class ApplicationController < ActionController::Base
 		@current_user = user
 		session[:user_id] = user.id
 	end
+	
+	def login_required
+		if not signed_in?
+			redirect_to sessions_url
+		end
+	end
 end

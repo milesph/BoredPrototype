@@ -1,0 +1,16 @@
+<div class="container" id = "approval">
+	<h1>My Events</h1>
+	<ul id="events">
+	<% @organizationsEvents.each do |organization| %>
+		<li><h2><%= organization.name %></h2>
+		<ul class="events">
+			<% if !organization.events.nil? %>
+				<% organization.events.each do |event| %>
+				<%= render event  %>
+				<% end %>
+			<% end %>
+		</ul>
+		</li>
+	<% end %>
+	</ul>
+</div>

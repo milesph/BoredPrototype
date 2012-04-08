@@ -14,22 +14,16 @@ class SessionsController < ApplicationController
 			auth = request.env["omniauth.auth"]
 			#user = User.find_by_andrew_id(auth["uid"])
 		else
-			user = User.new
-			user.first_name = "Eric"
-			user.last_name = "Wu"
-			user.andrew_id = "ewu"
+			user = User.find_by_andrew_id('admin')
 		end
 
-		#if user.nil?
-			#user = User.create
-			#user.andrew_id = auth["uid"]
-		#else
-			reset_session
-			session[:user_id] = user.id
-			flash[:notice] = "You have been successfully logged in"
-			puts "You have been logged in as #{auth["uid"]}"
-			redirect_to request.env['omniauth.origin'] || root_url(:subdomain => "my")
-		#end
+
+		reset_session
+		session[:user_id] = user.id
+		flash[:notice] = "You have been successfully logged in"
+		#puts "You have been logged in as #{auth["uid"]}"
+		puts "You have been logged in as #{current_user.andrew_id}"
+		redirect_to request.env['omniauth.origin'] || root_url
 	end
 	
 	def destroy

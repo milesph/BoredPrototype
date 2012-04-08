@@ -1,4 +1,5 @@
 class ApprovalController < ApplicationController
+	before_filter :login_required
 
   def index
     @events = Event.all

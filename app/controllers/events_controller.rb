@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+	before_filter :login_required, :only => [:new, :my, :create, :edit, :update, :destroy, :approve, :decline]
   # GET /events
   # GET /events.json
   # GET /events.xml
@@ -6,6 +7,16 @@ class EventsController < ApplicationController
     @events = Event.approved
 
     respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @events }
+      format.xml
+    end
+  end
+  
+  def my
+	@organizationsEvents= Organization.for_user(current_user).includes(:events)
+	
+	respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @events }
       format.xml
@@ -68,6 +79,7 @@ class EventsController < ApplicationController
     @event.event_end = params[:event][:event_end]
 
     editEvent(@event, params)
+	
   end
 
   # This event takes in an initialized event (event) and a list of parameters (params),
@@ -92,7 +104,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if event.errors.empty? and event.save 
-        format.html { redirect_to :action => 'index' }
+        format.html { redirect_to :action => 'my', notice: 'Event was successfully created.' }
         format.json { render json: event, status: :created, location: event }
       else
         format.html { render action: "new" }

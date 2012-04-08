@@ -1,21 +1,26 @@
-<h1>Listing organizations</h1>
+<div class="container" id="approval">
+	<h1>Listing organizations</h1>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<table>
+		<thead>
+	  <tr>
+		<th>Name</th>
+		<th></th>
+		<th></th>
+	  </tr>
+	</thead>
+	<tbody>
+	<% @organizations.each do |organization| %>
+	  <tr>
+		<td><%= link_to organization.name, organization %></td>
+		<td><%= link_to 'Edit', edit_organization_path(organization) %></td>
+		<td><%= link_to 'Remove', organization, confirm: 'Are you sure?', method: :delete %></td>
+	  </tr>
+	<% end %>
+	</tbody>
+	</table>
 
-<% @organizations.each do |organization| %>
-  <tr>
-    <td><%= link_to 'Show', organization %></td>
-    <td><%= link_to 'Edit', edit_organization_path(organization) %></td>
-    <td><%= link_to 'Destroy', organization, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+	<br />
 
-<br />
-
-<%= link_to 'New Organization', new_organization_path %>
+	<%= link_to 'New Organization', new_organization_path %>
+</div>
