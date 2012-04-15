@@ -30,23 +30,10 @@ $event_expanded_zindex: 900;
 	 border: 2px solid black;
 }
 
-.leftCol {
-	margin-right: 30px;
-	width: 250px;
-	
-	position: fixed;
-	z-index: 999;
-	-moz-box-sizing:    border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing:        border-box;
-	padding-top: 20px;
-}
 
 #eventscontainer { 
-	float: left;
-	padding-left: 20px;
-	border-left: 2px dotted #888;
-	margin-left: 20px;
+	margin-left: 275px;
+	padding-left: 25px;
 	#event {
 	float: left;
 	}
@@ -82,6 +69,7 @@ $event_expanded_zindex: 900;
 	padding: 15px;
 	background: rgba(0,0,0,0.65);
 	width: 250px;
+	padding-right: 20px;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
