@@ -45,19 +45,18 @@ $(function() {
     updateInfo(this);
   });
 
-	/* HAROLD'S CODE DO NOT INSULT */
-/*	$('ul.category-list').click(function(e){
-		if ( $(this).hasClass('expanded') ){
-			var liPosition = $(e.target).position();
-			$('li', this).css('top', -liPosition.top);
-			$('.events-col-info').toggle();
-			$(this).toggleClass('expanded');
-		} else {
-			$('li', this).css('top', 0);
-			$(this).toggleClass('expanded');
-			$('.events-col-info').toggle();
+  var i = 0;
+  for(i = 1; i <= hashCategories.length; i++) {
+      var catnumstr = i.toString();
+      $('li.catname-'.concat(catnumstr).click(function(e){
+	      if ( $('cat-'.concat(catnumstr)).css('display') == 'none' ){
+		  show_cat(i);
+		} 
+	      else {
+		  hide_cat(i);
 		}
-	});*/
+	});
+  }
 });
 
 $('.field input').focus(function(){
