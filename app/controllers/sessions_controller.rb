@@ -12,6 +12,11 @@ class SessionsController < ApplicationController
 		
 		if Rails.env == "production"
 			auth = request.env["omniauth.auth"]
+			
+			if auth.nil?
+				raise "Not authorized"
+			end
+			
 			user = User.find_by_andrew_id(auth["uid"])
 		else
 			user = User.find_by_andrew_id('admin')
