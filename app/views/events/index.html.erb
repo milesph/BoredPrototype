@@ -12,7 +12,7 @@
 	<ul id="category-list" class="category-list">
 			<li class="active">Hot Events</li>
 			<% EventsHelper::all_categories.each do |c| %>
-		    	<li class="catname-"+ <% c[1].to_s %>><%= c[0] %></li>
+		    	<li class = <%= "catname-" + c[1].to_s %> ><%= c[0] %></li>
 		  	<% end %>
 	</ul>
 	<br />

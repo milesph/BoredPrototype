@@ -45,18 +45,34 @@ $(function() {
     updateInfo(this);
   });
 
-  var i = 0;
-  for(i = 1; i <= hashCategories.length; i++) {
-      var catnumstr = i.toString();
-      $('li.catname-'.concat(catnumstr).click(function(e){
-	      if ( $('cat-'.concat(catnumstr)).css('display') == 'none' ){
-		  show_cat(i);
-		} 
-	      else {
-		  hide_cat(i);
-		}
-	});
-  }
+  $('li.catname-1').click(function(e){
+	  toggleonClick(1);
+      });
+
+  $('li.catname-2').click(function(e){
+	  toggleonClick(2);
+      });
+  $('li.catname-3').click(function(e){
+	  toggleonClick(3);
+      });
+  $('li.catname-4').click(function(e){
+	  toggleonClick(4);
+      });
+  $('li.catname-5').click(function(e){
+	  toggleonClick(5);
+      });
+  $('li.catname-6').click(function(e){
+	  toggleonClick(6);
+      });
+  $('li.catname-7').click(function(e){
+	  toggleonClick(7);
+      });
+  $('li.catname-8').click(function(e){
+	  toggleonClick(8);
+      });
+  $('li.catname-9').click(function(e){
+	  toggleonClick(9);
+      });
 });
 
 $('.field input').focus(function(){
@@ -65,6 +81,20 @@ $('.field input').focus(function(){
 $('.field input').blur(function(){
   $(this).parent().removeClass('form-focus');
 });
+
+function toggleonClick(i){
+    var cat = ".cat-" + (i).toString();
+    if ( $(cat).css('display') == "none" ){
+	$(".catname-" + (i).toString()).css('background-color', '#8C0F2E');
+	$(".catname-" + (i).toString()).css('color', 'white');
+	show_cat(i);
+    } 
+    else{
+	$(".catname-" + (i).toString()).css('background-color', '');
+	$(".catname-" + (i).toString()).css('color', 'inherit');
+	hide_cat(i);
+    }
+}
 
 function hide_cat(n){
 	cat_string = ".cat-"+n;
