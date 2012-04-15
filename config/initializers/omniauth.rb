@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   if Rails.env == "production"
-    provider :CMU, :host => 'http://128.237.72.144:3000/', :appid => 'teudu', :keyfile => '/usr/local/pubcookie/keys/cmuis.org'
+    provider :CMU, :host => 'http://128.237.72.144:3000/', :appid => 'teudu', :keyfile => '/usr/local/pubcookie/keys/cmuis.org', :granting_cert => '/usr/local/pubcookie/keys/pubcookie_granting.cert'
   end
 end
