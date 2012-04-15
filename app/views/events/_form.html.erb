@@ -22,11 +22,10 @@
     		<%= f.label :name %>
     		<%= f.text_field :name %>
   		</div>
-		<strong>Aquick blurb about your event!</strong>
-		<div class="field>
-			
-			<%= f.label :summary %>
-			<%= f.text_area :summary, :rows =>10 %>
+	
+		<div class="field">
+		        <%= f.label :"summary" %>
+			<%= f.text_area :summary, :rows =>10, :value =>"This summary will be displayed in the University Center.", :onfocus =>"value=''"%>
 		</div>
   		
 		<div class="field">
