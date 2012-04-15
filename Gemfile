@@ -16,13 +16,14 @@ end
 
 gem 'jquery-rails'
 gem 'paperclip', '~>2.4'
-gem "omniauth"
-gem "oa-pubcookie", :git => 'git://github.com/alexcrichton/oa-pubcookie.git'
+gem "omniauth", '~>1.1.0'
+#gem "oa-pubcookie", :git => 'git://github.com/alexcrichton/oa-pubcookie.git'
+gem "oa-pubcookie", "~> 0.1.0"
 
 # Deploy with to Heroku for testing
 # Use postgres for database as Heroku doesn't support sqlite3
 group :production do
-  gem 'pg'
+  gem 'sqlite3'
   # gem 'faker'   # Temporary for seeding purposes(?)
 end
 

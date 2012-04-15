@@ -12,18 +12,20 @@ class SessionsController < ApplicationController
 		
 		if Rails.env == "production"
 			auth = request.env["omniauth.auth"]
-			#user = User.find_by_andrew_id(auth["uid"])
+			user = User.find_by_andrew_id(auth["uid"])
 		else
 			user = User.find_by_andrew_id('admin')
 		end
 
-
 		reset_session
-		session[:user_id] = user.id
-		flash[:notice] = "You have been successfully logged in"
-		#puts "You have been logged in as #{auth["uid"]}"
-		puts "You have been logged in as #{current_user.andrew_id}"
-		redirect_to request.env['omniauth.origin'] || root_url
+			
+		if user.nil?
+			flash[:notice] = "You are not authorized to use this service."
+		else
+			session[:user_id] = user.id
+			flash[:notice] = "You have been successfully logged in"
+		end
+		redirect_to request.env['omniauth.origin'] || root_url	
 	end
 	
 	def destroy
