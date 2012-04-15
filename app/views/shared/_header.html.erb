@@ -23,7 +23,13 @@
 		<% end %>
 		<li><%= link_to "Sign out", logout_url %></li>
 	<% else %>
-		<li><%= link_to "Sign in", login_url %></li>
+		<li>
+		<% if Rails.env == "production" %>
+		<%= link_to "Sign in", login_url %>
+		<% else %>
+		<%= link_to "Sign in", sessions_url %>
+		<% end %>
+		</li>
 	<% end %>
 	</ul>
 
