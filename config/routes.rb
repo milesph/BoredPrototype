@@ -10,7 +10,7 @@ Teudu::Application.routes.draw do
   match 'events/my' => 'events#my'
   resources :events
 
-  #match 'sessions', :to => 'sessions#create'
+  match 'sessions', :to => 'sessions#create'
   match 'logout', :to => 'sessions#destroy'
   
   match 'login' => redirect('/auth/pubcookie')

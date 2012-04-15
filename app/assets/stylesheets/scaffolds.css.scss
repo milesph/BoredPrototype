@@ -13,7 +13,15 @@ div {
     margin-bottom: 10px; } }
 
 #notice {
-  color: green; }
+  color: green; 
+}
+
+#flash_notice {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #8C0F2E;
+  text-align:center;
+}
 
 .field_with_errors {
   padding: 2px;
@@ -24,7 +32,6 @@ div {
   list-style-type: none;}
 
 #error_explanation {
-//  list-style-type: none;	
   width: 450px;
   border: 2px solid #8C0F2E;
   padding: 7px;
