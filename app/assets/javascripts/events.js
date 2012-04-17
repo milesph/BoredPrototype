@@ -43,11 +43,13 @@ $(function() {
   $('.datepicker').datepicker();
   $('.event').click(function(){
     updateInfo(this);
+	$('html, body').animate({ scrollTop: 0 }, "fast", "swing");
   });
 
   $('li.mycategory').click(function(e){
 	  
       });
+	  
 	/* HAROLD'S CODE DO NOT INSULT */
   /*	$('ul.category-list').click(function(e){
 		if ( $(this).hasClass('expanded') ){
@@ -66,3 +68,4 @@ $('.field input').focus(function(){
 $('.field input').blur(function(){
   $(this).parent().removeClass('form-focus');
 });
+
