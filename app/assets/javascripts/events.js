@@ -38,38 +38,46 @@ function updateInfo(node) {
   $('#info-date', infoBar).html($('.event-date', node).html());
 }
 
-
 $(function() {
   $('.datepicker').datepicker();
   $('.event').click(function(){
     updateInfo(this);
   });
 
+  init(1);
   $('li.catname-1').click(function(e){
 	  toggleonClick(1);
       });
 
+  init(2);
   $('li.catname-2').click(function(e){
 	  toggleonClick(2);
       });
+  init(3);
   $('li.catname-3').click(function(e){
 	  toggleonClick(3);
       });
+  init(4);
   $('li.catname-4').click(function(e){
 	  toggleonClick(4);
       });
+  init(5);
   $('li.catname-5').click(function(e){
 	  toggleonClick(5);
       });
+  init(6);
   $('li.catname-6').click(function(e){
 	  toggleonClick(6);
       });
+  init(7);
   $('li.catname-7').click(function(e){
 	  toggleonClick(7);
       });
+  init(8);
   $('li.catname-8').click(function(e){
 	  toggleonClick(8);
       });
+  init(9);
   $('li.catname-9').click(function(e){
 	  toggleonClick(9);
       });
@@ -81,6 +89,14 @@ $('.field input').focus(function(){
 $('.field input').blur(function(){
   $(this).parent().removeClass('form-focus');
 });
+
+function init(i) {
+    var cat = '.cat-' + (i).toString();
+    if($(cat).css('display') != "none") {
+	$(".catname-" + (i).toString()).css('background-color', '#8C0F2E');
+	$(".catname-" + (i).toString()).css('color', 'white');
+    }
+}
 
 function toggleonClick(i){
     var cat = ".cat-" + (i).toString();
@@ -108,6 +124,7 @@ function show_cat(n){
 
 //hide all events that have a category
 function hide_all() {	
+
 	for(var cur_cat in hashCategories)
 	{
 		hide_cat(hashCategories[cur_cat][1]);
