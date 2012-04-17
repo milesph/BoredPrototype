@@ -106,7 +106,8 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if event.errors.empty? and event.save 
-        format.html { redirect_to :action => 'my', notice: 'Event was successfully created.' }
+		flash[:notice] = "Successfully created event #{event.name}."
+        format.html { redirect_to :action => 'my' }
         format.json { render json: event, status: :created, location: event }
       else
         format.html { render action: "new" }

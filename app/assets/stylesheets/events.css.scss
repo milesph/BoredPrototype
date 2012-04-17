@@ -163,6 +163,7 @@ $event_expanded_zindex: 900;
 	}
 	
 	.form-info {
+	float: left;
 		width: 70%;
 		display: inline;
 		label {
@@ -171,7 +172,10 @@ $event_expanded_zindex: 900;
 			}
 		textarea {
 			 
-			height: 150px; }
+			height: 200px; }
+			.summary_field{
+				height: 100px;
+			}
 
 		input.datepicker {
 			width: 200px; }
@@ -214,8 +218,13 @@ $event_expanded_zindex: 900;
 	.event-categories {
 //		display: inline-table;	
 //		width: 25%;
-		float: right;
-
+//		float: right;
+//left: 545px;
+//position:relative;
+//top: -605px;
+float: left;
+margin-left: 10px;
+margin-top: 5px;
 		ul {
 			margin-top: 25px; }
 		li {
