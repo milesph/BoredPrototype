@@ -31,7 +31,7 @@ module EventsHelper
     'check-' + name.downcase
   end
 
-  def cat_to_array(categories)
+  def self.cat_to_array(categories)
     # Takes an event's category string as stored in the database and returns
     # an array where each element is the category number (type string)
     categories.split(',')
@@ -45,5 +45,9 @@ module EventsHelper
       cat_classes += 'cat-' + c + ' '
     end
     return cat_classes[0..-2]
+  end
+  
+  def self.cat_to_id(cat)
+	return @@category_hash[cat]
   end
 end
