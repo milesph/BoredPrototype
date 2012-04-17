@@ -3,7 +3,7 @@ include ActionView::Helpers::DateHelper
 class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
-  validates_presence_of :name, :description,  :summary, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
+  validates_presence_of :name, :description,  :summary, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end, :user, :organization
   validates_size_of :location, :maximum => 100
   validates_size_of :summary, :maximum => 300
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/
@@ -47,6 +47,18 @@ class Event < ActiveRecord::Base
     else
       "approved"
     end
+  end
+  
+  def can_modify?(in_user)
+	if in_user.nil?
+		return false
+	end
+	
+	if in_user.moderator == true
+		return true
+	end
+
+	!in_user.organizations.where("id = ?", self.organization.id).empty?
   end
 
   # Parses an event's time and returns it as an array of Datetime objects
@@ -99,8 +111,8 @@ class Event < ActiveRecord::Base
     if self.start_time.nil?
       return Time.now.strftime('%m/%d/%Y')
     else
-      puts "AHHHHHHHHHHHHHHHHH"
-      puts self.start_time
+      #puts "AHHHHHHHHHHHHHHHHH"
+      #puts self.start_time
       old_date = DateTime.strptime(self.start_time, '%Y-%d-%m %H:%M') rescue Time.now
       old_date.strftime('%m/%d/%Y')
     end
@@ -110,8 +122,8 @@ class Event < ActiveRecord::Base
     if self.end_time.nil?
       return Time.now.strftime('%m/%d/%Y')
     else
-      puts "AHHHHHHHHHHHHHHHHH"
-      puts self.end_time
+      #puts "AHHHHHHHHHHHHHHHHH"
+      #puts self.end_time
       old_date = DateTime.strptime(self.end_time, '%Y-%d-%m %H:%M') rescue Time.now
       old_date.strftime('%m/%d/%Y')
     end
@@ -130,9 +142,6 @@ class Event < ActiveRecord::Base
   
   def in_category?(cat)
 	if(!self.categories.nil?)
-	puts "Cats are #{EventsHelper::cat_to_array(self.categories)}"
-	puts "Checking cat #{cat}"
-		#puts EventsHelper::cat_to_id(cat)
 		return EventsHelper::cat_to_array(self.categories).include?(cat)
 	else
 		return false
@@ -257,6 +266,13 @@ class Event < ActiveRecord::Base
       errors.add :location, "invalid: Cannot be a duplicate event."
       validEvent = false
     end
+	
+	# This block checks to make sure that the organization
+	# matches the specified user
+	if !can_modify?(self.user)
+	  errors.add :organization, "should be one that you are a member of"
+      validEvent = false
+	end
 
     return validEvent
   end

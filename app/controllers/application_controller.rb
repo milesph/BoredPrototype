@@ -1,12 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include Exceptions
-    #rescue_from Exception, :with => :render_error
-    #rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
-    #rescue_from ActionController::RoutingError, :with => :render_not_found
-    #rescue_from ActionController::UnknownController, :with => :render_not_found
-    #rescue_from ActionController::UnknownAction, :with => :render_not_found
+    rescue_from Exception, :with => :render_error
+    rescue_from ActiveRecord::RecordNotFound, :with => :render_not_found
+    rescue_from ActionController::RoutingError, :with => :render_not_found
+    rescue_from ActionController::UnknownController, :with => :render_not_found
+    rescue_from ActionController::UnknownAction, :with => :render_not_found
 	rescue_from Exceptions::AuthenticationException, :with => :render_not_authorized
+	rescue_from Exceptions::AccessDeniedException, :with => :render_access_denied
   
   def current_user
 		@current_user ||= User.find_by_id(session[:user_id])
@@ -31,16 +32,26 @@ class ApplicationController < ActionController::Base
 	
 	def render_not_found(exception)
     #log_error(exception)
-    render :template => "/error/404.html.erb", :status => 404
+    #render :template => "/error/404.html.erb", :status => 404
+	flash[:notice] = "Whoops! Something bad happened."
+	redirect_to root_url
   end
 
   def render_error(exception)
     #log_error(exception)
-    render :template => "/error/500.html.erb", :status => 500
+    #nder :template => "/error/500.html.erb", :status => 500
+	flash[:notice] = "Whoops! Something unexpected happened. We are looking into it."
+	redirect_to root_url
   end
   
   def render_not_authorized(exception)
 	flash[:notice] = "Either you are not logged in or your Andrew ID has not been approved for creating events."
 	redirect_to root_url
   end
+  
+  def render_access_denied(exception)
+	flash[:notice] = "Access denied. Maybe you're not a member of this organization?"
+	redirect_to root_url
+  end
+ 
 end

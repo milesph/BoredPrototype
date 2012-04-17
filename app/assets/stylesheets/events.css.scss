@@ -124,7 +124,7 @@ $event_expanded_zindex: 900;
     width: 100%;
   }
 
-  .event-category, .event-info, .edit-link {
+  .event-category, .event-info{
       display: none;
   }
 }
@@ -285,4 +285,34 @@ margin-top: 5px;
 
 .cat-button:active {
   border-left: 4px solid darkred;
+}
+
+ul#user-events li{
+	clear:both;
+	display:block;
+}
+
+.modify-tools{
+	position:absolute;
+	width: 100%;
+	top: 175px;
+	height: 30px;
+	background-color: #888;
+}
+
+.edit-link, .delete-link, edit-link:visited, .delete-link:visited{
+	position:relative;
+	left: 5px;
+	top: 5px;
+	text-transform: uppercase;
+	text-decoration: none !important;
+	color: black !important;
+}
+
+.edit-link:hover, .delete-link:hover{
+	text-decoration: underline !important;
+}
+
+.delete-link,.delete-link:visited{
+	color: #8C0F2E !important;
 }

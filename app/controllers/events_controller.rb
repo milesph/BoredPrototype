@@ -48,13 +48,16 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+	if !@event.can_modify?(current_user)
+		raise Exceptions::AccessDeniedException
+	end
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(params[:event])
-	#@event.user = current_user
+	@event.user = current_user
 
     #@event.save
     
@@ -66,6 +69,10 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
+	if !@event.can_modify?(current_user)
+		raise Exceptions::AccessDeniedException
+	end
+	
     # Note: this block is designed to zero out the categories,
     # start and end times, and put the rest of the variables
     # equal to what the inputted parameters are.  If you
@@ -79,6 +86,7 @@ class EventsController < ApplicationController
     @event.categories = params[:event][:categories]
     @event.event_start = params[:event][:event_start]
     @event.event_end = params[:event][:event_end]
+	@event.organization_id = params[:event][:organization_id]
 
     editEvent(@event, params)
 	
@@ -120,8 +128,15 @@ class EventsController < ApplicationController
   # DELETE /events/1.json
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
+	
+	if !@event.can_modify?(current_user)
+		raise Exceptions::AccessDeniedException
+	end
+    name = @event.name
+	@event.destroy
 
+	flash[:notice] = "Successfully deleted event #{name}."
+	
     respond_to do |format|
       format.html { redirect_to events_url }
       format.json { head :ok }
@@ -130,6 +145,11 @@ class EventsController < ApplicationController
 
   def approve
     @event = Event.find(params[:id])
+	
+	if current_user.moderator == false
+		raise Exceptions::AccessDeniedException
+	end
+	
     @event.approve_event
     @event.save
     respond_to do |format|
@@ -140,6 +160,11 @@ class EventsController < ApplicationController
 
   def decline
     @event = Event.find(params[:id])
+	
+	if current_user.moderator == false
+		raise Exceptions::AccessDeniedException
+	end
+	
     @event.decline_event
     @event.save
     respond_to do |format|

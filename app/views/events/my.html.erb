@@ -1,15 +1,15 @@
 <div class="container" id = "approval">
 	<h1>My Events</h1>
-	<ul id="events">
+	<ul id="user-events">
 	<% @organizationsEvents.each do |organization| %>
 		<li><h2><%= organization.name %></h2>
-		<ul class="events">
 			<% if !organization.events.nil? %>
+				<div>
 				<% organization.events.each do |event| %>
-				<%= render event  %>
+				<div id="event"><%= render event  %></div>
 				<% end %>
+				</div>
 			<% end %>
-		</ul>
 		</li>
 	<% end %>
 	</ul>
