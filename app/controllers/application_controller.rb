@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   end
   
   def render_not_authorized(exception)
-	flash[:notice] = "Your andrew ID has not been approved for creating events. You should contact the moderator for access."
+	flash[:notice] = "Either you are not logged in or your Andrew ID has not been approved for creating events."
 	redirect_to root_url
   end
 end
