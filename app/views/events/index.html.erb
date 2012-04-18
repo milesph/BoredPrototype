@@ -10,7 +10,7 @@
 	<% else %>
 
 	<ul id="category-list" class="category-list">
-			<li class="active">All</li>
+			<li class="catname-0">All</li>
 			<% EventsHelper::all_categories.each do |c| %>
 		    	<li class = <%= "catname-" + c[1].to_s %> ><%= c[0] %></li>
 		  	<% end %>
