@@ -30,6 +30,8 @@ var App = {
 };
 */
 
+var full = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // All categories
+
 function updateInfo(node) {
   var infoBar = $('.info-main');
   $('#info-title', infoBar).html($('.event-title', node).html());
@@ -44,40 +46,46 @@ $(function() {
     updateInfo(this);
   });
 
-  init(1);
+
+  var i = 1; 
+
+  init();
+  $('li.catname-0').click(function(e){
+	toggleAll();
+  });
+
   $('li.catname-1').click(function(e){
 	  toggleonClick(1);
       });
 
-  init(2);
   $('li.catname-2').click(function(e){
 	  toggleonClick(2);
       });
-  init(3);
+
   $('li.catname-3').click(function(e){
 	  toggleonClick(3);
       });
-  init(4);
+
   $('li.catname-4').click(function(e){
 	  toggleonClick(4);
       });
-  init(5);
+
   $('li.catname-5').click(function(e){
 	  toggleonClick(5);
       });
-  init(6);
+
   $('li.catname-6').click(function(e){
 	  toggleonClick(6);
       });
-  init(7);
+
   $('li.catname-7').click(function(e){
 	  toggleonClick(7);
       });
-  init(8);
+
   $('li.catname-8').click(function(e){
 	  toggleonClick(8);
       });
-  init(9);
+
   $('li.catname-9').click(function(e){
 	  toggleonClick(9);
       });
@@ -90,25 +98,68 @@ $('.field input').blur(function(){
   $(this).parent().removeClass('form-focus');
 });
 
-function init(i) {
-    var cat = '.cat-' + (i).toString();
-    if($(cat).css('display') != "none") {
-	$(".catname-" + (i).toString()).css('background-color', '#8C0F2E');
-	$(".catname-" + (i).toString()).css('color', 'white');
-    }
+function buttonoff(i) {
+    $(".catname-" + (i).toString()).css('background-color', '');
+    $(".catname-" + (i).toString()).css('color', 'inherit');
 }
 
+function buttonon(i) {
+    $(".catname-" + (i).toString()).css('background-color', '#8C0F2E');
+    $(".catname-" + (i).toString()).css('color', 'white');
+}
+
+
+// Initialize the page
+function init() {
+    buttonon(0);
+    show_only_cats(full);
+    var i = 1; 
+    for(i = 1; i <= hashCategories.length; i++) {
+    	buttonoff(i);
+    }
+
+}
+
+// Toggle button i 
 function toggleonClick(i){
-    var cat = ".cat-" + (i).toString();
-    if ( $(cat).css('display') == "none" ){
-	$(".catname-" + (i).toString()).css('background-color', '#8C0F2E');
-	$(".catname-" + (i).toString()).css('color', 'white');
+    buttonoff(0);
+    refresh_cat();
+    cat = '.cat-' + (i).toString();
+    if ( $(cat).css('display') == "none" 
+	|| $(".catname-" + (i).toString()).css('color') != 'rgb(255, 255, 255)'){
+	buttonon(i);
 	show_cat(i);
     } 
     else{
-	$(".catname-" + (i).toString()).css('background-color', '');
-	$(".catname-" + (i).toString()).css('color', 'inherit');
+	buttonoff(i);
 	hide_cat(i);
+	refresh_cat();
+    }
+}
+
+
+// Toggling function for all events
+function toggleAll() {	
+	var empty = new Array();
+	if($(".catname-0").css('color') == 'rgb(255, 255, 255)') {
+		buttonoff(0);
+        	show_only_cats(empty);
+	}
+	else {
+		buttonon(0);
+		init();
+		show_only_cats(full);
+	}
+
+}
+
+function refresh_cat() {
+    var i = 1; 
+    hide_all();
+    for(i = 1; i <= hashCategories.length; i++) {
+	if($(".catname-" + (i).toString()).css('color') == "rgb(255, 255, 255)") {
+		show_cat(i);
+	}
     }
 }
 
