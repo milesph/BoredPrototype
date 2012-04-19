@@ -47,11 +47,8 @@ $event_expanded_zindex: 900;
 	}
 	list-style-type: none;
 	padding-bottom: 20px;
-	margin-left: 18%;
-	//margin-left: 271px;
-	//margin-left: 172px;
-	//margin-left: 10%;
-	min-width: 500px;
+	text-align: center;
+	min-width: 1000px;
 	li {
 	 display: inline-table;
 	 text-align: center;
@@ -67,6 +64,10 @@ $event_expanded_zindex: 900;
 		color: white;
 		text-shadow: 0px 1px 1px #000;
 		cursor: pointer; }
+	}
+
+	.catname-0 {
+		border: 0px;
 	}
 }
 
