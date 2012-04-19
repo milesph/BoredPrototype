@@ -28,23 +28,28 @@
   		<div class="field">
     		<strong><%= f.label :name %></strong>
     		<%= f.text_field :name %>
+			<p>(e.g. CMU Multicultural Formal 2012)</p>
   		</div>
-	
+		
 		<div class="field">
 		    <strong><%= f.label :"summary" %></strong>
-			<%= f.text_area :summary, :rows =>2,:value =>"Some brief words about the event for the impatient reader. Note: This summary will be shown on our interactive display in the University Center.", :onfocus =>"value=''", :class=>"summary_field"%>
+			<%= f.text_area :summary, :rows =>2, :class=>"summary_field"%>
+			<p>Something quick and informative to draw people in!</p>
 		</div>
   		
 		<div class="field">
     		<strong><%= f.label :description %></strong>
     		<%= f.text_area :description %>
+			<p>A longer, more detailed plan for the event.</p>
   		</div>
-  
+		
+		
 		<div class="field">
     		<strong><%= f.label :"Where?" %></strong>
-    		<%= f.text_field :location, :value => "(for e.g. Gates-Hillman 4300)", :onfocus =>"value=''"  %>
+    		<%= f.text_field :location %>
+			<p>(e.g. UC Merson Courtyard)</p>
   		</div>
-
+		
 		
 
   		<div class="field">
