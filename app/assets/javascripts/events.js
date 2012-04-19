@@ -36,6 +36,7 @@ function updateInfo(node) {
   $('#info-desc', infoBar).html($('.event-desc', node).html());
   $('#info-location', infoBar).html($('.event-location', node).html());
   $('#info-date', infoBar).html($('.event-date', node).html());
+  $('#info-organization', infoBar).html($('.event-organization', node).html());
 }
 
 

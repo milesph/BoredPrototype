@@ -20,6 +20,11 @@
 			  All events have been approved.
 			<% end %>
 			</li>
+		<% else %>
+			<li><%= link_to "My Events", events_my_path %></li>
+			<li class="right">
+				Hi <%= current_user.name %>!
+			</li>
 		<% end %>
 		<li><%= link_to "Sign out", logout_url %></li>
 	<% else %>
