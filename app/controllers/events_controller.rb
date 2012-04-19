@@ -82,6 +82,7 @@ class EventsController < ApplicationController
     @event.end_time = nil
     @event.name = params[:event][:name]
     @event.description = params[:event][:description]
+	@event.flyer = params[:event][:flyer]
     @event.location = params[:event][:location]
     @event.categories = params[:event][:categories]
     @event.event_start = params[:event][:event_start]
