@@ -16,11 +16,11 @@ class Event < ActiveRecord::Base
 
   #### SCOPES ####
   scope :all, order("start_time ASC")
-  scope :upcoming, where("start_time >= ?", Time.now)
+  scope :upcoming, where("event_end >= ?", Time.current.strftime("%Y-%m-%d %H:%M"))
   scope :approved, where("approval_rating = ?", 100).order("event_start ASC")
-  scope :current_approved, where("event_end >= :time_now and approval_rating == :rating", {:time_now=>Time.now, :rating => 100}).order("event_start ASC")
+  scope :current_approved, where("event_end >= ? and approval_rating = ?", Time.current.strftime("%Y-%m-%d %H:%M"),100)
   scope :awaiting_approval, where("approval_rating = ?", 0)
-  scope :approved_upcoming, where("start_time >= ?", Time.now).where("approval_rating = ?", 100)
+  scope :approved_upcoming, where("event_end >= ?", Time.current.strftime("%Y-%m-%d %H:%M")).where("approval_rating = ?", 100)
 
 
   #### PAPERCLIP ####
