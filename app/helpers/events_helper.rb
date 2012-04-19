@@ -10,13 +10,13 @@ module EventsHelper
   @@category_hash = {
   "Arts" => 1, 
   "Sports" =>2,
-  "Professional" => 4,
-  "Cultural" => 6,
-  "Music" => 7,
-  "Movies" => 8,
-  "Academic" => 9,
-  "Social" => 10,
-  "Service" => 11
+  "Professional" => 3,
+  "Cultural" => 4,
+  "Music" => 5,
+  "Movies" => 6,
+  "Academic" => 7,
+  "Social" => 8,
+  "Service" => 9
   }
 
   def self.all_categories
@@ -31,7 +31,7 @@ module EventsHelper
     'check-' + name.downcase
   end
 
-  def cat_to_array(categories)
+  def self.cat_to_array(categories)
     # Takes an event's category string as stored in the database and returns
     # an array where each element is the category number (type string)
     categories.split(',')
@@ -45,5 +45,41 @@ module EventsHelper
       cat_classes += 'cat-' + c + ' '
     end
     return cat_classes[0..-2]
+  end
+  
+  def self.cat_to_id(cat)
+	return @@category_hash[cat]
+  end
+
+  def categories_javascript()
+    return nested_array_to_javascript(EventsHelper.all_categories)
+  end
+
+  #Turns an array, even a nested one, from Ruby to Javascript
+  def nested_array_to_javascript(option)
+  	retVal = ""
+
+  	if option.kind_of?(Array)
+  		retVal += "["
+  		option.each do |elem|
+  			retVal += nested_array_to_javascript(elem)
+  			retVal += ","
+  		end
+
+  		#Remove last comma from retVal
+  		retVal = retVal[0...-1]
+
+  		retVal += "]"
+  	end
+
+  	if option.kind_of?(String)
+  		retVal += "\'" + option + "\'"
+  	end
+
+  	if option.kind_of?(Integer)
+  		retVal += option.to_s()
+  	end
+
+  	return retVal
   end
 end

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
 			auth = request.env["omniauth.auth"]
 			
 			if auth.nil?
-				raise "Not authorized"
+				raise Exceptions::AuthenticationException
 			end
 			
 			user = User.find_by_andrew_id(auth["uid"])
@@ -25,10 +25,10 @@ class SessionsController < ApplicationController
 		reset_session
 			
 		if user.nil?
-			flash[:notice] = "You are not authorized to use this service."
+			raise Exceptions::AuthenticationException
 		else
 			session[:user_id] = user.id
-			flash[:notice] = "You have been successfully logged in"
+			flash[:notice] = "Welcome, #{current_user.name}!"
 		end
 		redirect_to request.env['omniauth.origin'] || root_url	
 	end

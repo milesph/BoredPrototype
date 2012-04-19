@@ -1,0 +1,13 @@
+rake unit test #Vivek's unit testing tool. Always try before a commit
+
+Alert: Only commit working code to master branch. This branch is being pulled to production!
+
+Find out who on the team will be here this summer.
+
+Add category to Teudu: "Funded by student activities fee?"
+
+Finish category filtering
+Implement time filtering front end (back end is already in place --this shouldn't be too difficult)
+Hack up login if Vivek and I cannot get WebISO working by Saturday
+Add data for launch
+Discuss launch strategy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415180208) do
+ActiveRecord::Schema.define(:version => 20120417134225) do
 
   create_table "events", :force => true do |t|
     t.string   "name",                                  :null => false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120415180208) do
     t.string   "flyer"
     t.integer  "pattern"
     t.string   "categories"
-    t.integer  "approval_rating",    :default => 0
+    t.integer  "approval_rating",    :default => 100
     t.string   "approver_id"
     t.string   "flyer_file_name"
     t.string   "flyer_content_type"

@@ -6,7 +6,8 @@ $animation_length: 0.5s;
 $info_column_width: 300px;
 $header_height: 500px;
 
-html { height: 100%; }
+html { height: 100%; 
+       min-width: 1200px;}
 
 body {
   overflow: scroll;
@@ -20,18 +21,43 @@ body {
   margin: 0 auto -4em;
 }
 
+hr{
+	border-style: dashed;
+	border-color: #777;
+	border-width: 0px 0px 1px 0px;
+}
+
+form{
+	width: 800px;
+
+}
+
+.pageText{
+	width: 800px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+
+}
+	.pageText h2{
+		margin: 20px 0px 0px 0px;
+		font-size: 18px;
+		color: #8C0F2E;
+	}
+
 .paragraphtext {
-	 text-align: center; 
 	 margin:20px auto 0px auto; 
-	 width: 50%; 
 	 line-height: 150%; 
 	 letter-spacing: 1px;
+	 padding-bottom: 5px;
+	 	border-style: dashed;
+	border-color: #777;
+	border-width: 0px 0px 1px 0px;
 }
 
 .header {
 
 	display: block;
-	padding: 30px 0 30px 0;
+	padding: 30px 0 0 0;
 	border-bottom: 1px dotted #888;
 	z-index: 5;
 	width: 100%;
@@ -126,18 +152,30 @@ body {
 	width: 90%;
 
 	display: block;
-	padding: 30px;
+	padding: 0px 30px 30px 30px;
 }
 
 .footer {
+	float: right;
 	width: 100%;
 	position: relative;
 	top: 30px;
-
 	border-top: 1px dotted #888;
 	padding: 10px 0 30px 0;
 	text-align:center;
 	font-size: 12px;
 	letter-spacing: 1px;
 	clear: both;
+}
+
+.field_with_errors{
+	display: block !important;
+}
+
+.instructions{
+	margin-bottom: 2em;
+}
+
+p{
+	line-height: 150%;
 }

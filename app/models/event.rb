@@ -3,12 +3,11 @@ include ActionView::Helpers::DateHelper
 class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
-  validates_presence_of :name, :description,  :summary, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end
+  validates_presence_of :name, :description,  :summary, :location, :start_time, :end_time, :categories, :approval_rating, :event_start, :event_end, :user, :organization
   validates_size_of :location, :maximum => 100
   validates_size_of :summary, :maximum => 300
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/
 
-  
   before_save :add_event_times
 
   before_validation :check_invariants
@@ -28,13 +27,18 @@ class Event < ActiveRecord::Base
   has_attached_file :flyer
 
   #validates_attachment :flyer,
-  #:content_type => { :content_type => "image/jpg" },
-  #:size => { :in => 0..10.kilobytes }
+  #:content_type => { :content_type => 'image/png', 'image/jpg' },
+  #:size => { :in => 0..2000.kilobytes }
+  
+  validates_attachment_content_type :flyer, :content_type => /^image\/(jpg|jpeg|pjpeg|png|x-png|gif)$/, :message => 'must be of the following formats: jpeg, png, or gif '
+  validates_attachment_size :flyer, :in => 0..500.kilobytes , :message => 'must be at maximum 500 kb'
   
   #### DATA ####
   EVENT_TIMES = ["12:00 am", "00:00"], ["12:30 am", "00:30"], ["1:00 am", "1:00"], ["1:30 am", "1:30"], ["2:00 am", "2:00"], ["2:30 am", "2:30"], ["3:00 am", "3:00"], ["3:30 am", "3:30"], ["4:00 am", "4:00"], ["4:30 am", "4:30"], ["5:00 am", "5:00"], ["5:30 am", "5:30"], ["6:00 am", "6:00"], ["6:30 am", "6:30"], ["7:00 am", "7:00"], ["7:30 am", "7:30"], ["8:00 am", "8:00"], ["8:30 am", "8:30"], ["9:00 am", "9:00"], ["9:30 am", "9:30"], ["10:00 am", "10:00"], ["10:30 am", "10:30"], ["11:00 am", "11:00"], ["11:30 am", "11:30"], ["12:00 pm", "12:00"], ["12:30 pm", "12:30"], ["1:00 pm", "13:00"], ["1:30 pm", "13:30"], ["2:00 pm", "14:00"], ["2:30 pm", "14:30"], ["3:00 pm", "15:00"], ["3:30 pm", "15:30"], ["4:00 pm", "16:00"], ["4:30 pm", "16:30"], ["5:00 pm", "17:00"], ["5:30 pm", "17:30"], ["6:00 pm", "18:00"], ["6:30 pm", "18:30"], ["7:00 pm", "19:00"], ["7:30 pm", "19:30"], ["8:00 pm", "20:00"], ["8:30 pm", "20:30"], ["9:00 pm", "21:00"], ["9:30 pm", "21:30"], ["10:00 pm", "22:00"], ["10:30 pm", "22:30"], ["11:00 pm", "23:00"], ["11:30 pm", "23:30"]
   EVENT_CATEGORIES = %w(Arts Sports Professional Cultural Music Movies Academic Social Service)
 
+  include EventsHelper
+  
   #### PUBLIC METHODS ####
 
   def approval_status
@@ -45,6 +49,18 @@ class Event < ActiveRecord::Base
     else
       "approved"
     end
+  end
+  
+  def can_modify?(in_user)
+	if in_user.nil?
+		return false
+	end
+	
+	if in_user.moderator == true
+		return true
+	end
+
+	!in_user.organizations.where("id = ?", self.organization.id).empty?
   end
 
   # Parses an event's time and returns it as an array of Datetime objects
@@ -97,8 +113,8 @@ class Event < ActiveRecord::Base
     if self.start_time.nil?
       return Time.now.strftime('%m/%d/%Y')
     else
-      puts "AHHHHHHHHHHHHHHHHH"
-      puts self.start_time
+      #puts "AHHHHHHHHHHHHHHHHH"
+      #puts self.start_time
       old_date = DateTime.strptime(self.start_time, '%Y-%d-%m %H:%M') rescue Time.now
       old_date.strftime('%m/%d/%Y')
     end
@@ -108,12 +124,13 @@ class Event < ActiveRecord::Base
     if self.end_time.nil?
       return Time.now.strftime('%m/%d/%Y')
     else
-      puts "AHHHHHHHHHHHHHHHHH"
-      puts self.end_time
+      #puts "AHHHHHHHHHHHHHHHHH"
+      #puts self.end_time
       old_date = DateTime.strptime(self.end_time, '%Y-%d-%m %H:%M') rescue Time.now
       old_date.strftime('%m/%d/%Y')
     end
   end
+  
 
   # Approval
   def approve_event
@@ -124,6 +141,14 @@ class Event < ActiveRecord::Base
   def decline_event
     self.approval_rating = -1
 	self.save!
+  end
+  
+  def in_category?(cat)
+	if(!self.categories.nil?)
+		return EventsHelper::cat_to_array(self.categories).include?(cat)
+	else
+		return false
+	end
   end
   
   
@@ -244,6 +269,13 @@ class Event < ActiveRecord::Base
       errors.add :location, "invalid: Cannot be a duplicate event."
       validEvent = false
     end
+	
+	# This block checks to make sure that the organization
+	# matches the specified user
+	if !can_modify?(self.user)
+	  errors.add :organization, "should be one that you are a member of"
+      validEvent = false
+	end
 
     return validEvent
   end
@@ -259,6 +291,7 @@ class Event < ActiveRecord::Base
       return true
     end
   end
+  
   
   
   

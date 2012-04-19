@@ -1,12 +1,18 @@
+<script>
+	var hashCategories = new Array();
+
+	hashCategories = <%= categories_javascript()%>;
+</script>
+
 <div class="container">	
   	<% if Event.all.empty? then %>
-	<div class="paragraphtext"> Sorry, there are currently no events. Make a new event by clicking "Create an event" in the menu.</div>
+	<div class="paragraphtext"> Sorry, there are currently no events. Make a new event by clicking "Create an event" in the menu. <br /></div>
 	<% else %>
 
 	<ul id="category-list" class="category-list">
-			<li class="active">Hot Events</li>
+			<li class="catname-0">All</li>
 			<% EventsHelper::all_categories.each do |c| %>
-		    	<li><%= c[0] %></li>
+		    	<li class = <%= "catname-" + c[1].to_s %> ><%= c[0] %></li>
 		  	<% end %>
 	</ul>
 	<br />
@@ -16,6 +22,7 @@
 		<div class="events-col-info">
 			<h2>Click an event to see details &rarr;</h2>
 			<div class="info-main">
+				<p id="info-organization"></p>
 		    	<h2 id="info-title"></h2>
 		
 		    	<p id="info-date"></p>
@@ -24,6 +31,7 @@
 				<p id="info-desc"></p>
 		  	</div>
 		</div>
+
 	<!--</div>-->
 	<% end %>
 	<div id="eventscontainer">
@@ -34,3 +42,5 @@
 
 
 </div>
+
+
