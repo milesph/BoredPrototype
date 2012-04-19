@@ -77,17 +77,22 @@ class EventsController < ApplicationController
     # start and end times, and put the rest of the variables
     # equal to what the inputted parameters are.  If you
     # can think of a better way do implement this, please do.
-    @event.categories = nil
-    @event.start_time = nil
-    @event.end_time = nil
-    @event.name = params[:event][:name]
-    @event.description = params[:event][:description]
-	@event.flyer = params[:event][:flyer]
-    @event.location = params[:event][:location]
-    @event.categories = params[:event][:categories]
+    #@event.start_time = nil
+    #@event.end_time = nil
+    #@event.name = params[:event][:name]
+    #@event.description = params[:event][:description]
+	#@event.flyer = params[:event][:flyer]
+    #@event.location = params[:event][:location]
+    #@event.categories = params[:event][:categories]
+	#@event.organization_id = params[:event][:organization_id]
+	@event.update_attributes(params[:event])
+	
     @event.event_start = params[:event][:event_start]
     @event.event_end = params[:event][:event_end]
-	@event.organization_id = params[:event][:organization_id]
+	
+	
+	
+	
 
     editEvent(@event, params)
 	

@@ -1,4 +1,4 @@
-<%= form_for @event do |f| %>
+<%= form_for @event, :html => { :multipart => true } do |f| %>
 	<div class="instructions">
 	<p><strong>Note: All fields except flyer are required and you must select a category or two.</strong></p>
 	<p>We strongly encourage you to submit a flyer to make your event stand out!</p>
