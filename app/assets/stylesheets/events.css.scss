@@ -47,10 +47,11 @@ $event_expanded_zindex: 900;
 	}
 	list-style-type: none;
 	padding-bottom: 20px;
-	margin-left: 271px;
+	margin-left: 18%;
+	//margin-left: 271px;
 	//margin-left: 172px;
 	//margin-left: 10%;
-	width: 1200px;
+	min-width: 500px;
 	li {
 	 display: inline-table;
 	 text-align: center;
