@@ -8,7 +8,6 @@ class Event < ActiveRecord::Base
   validates_size_of :summary, :maximum => 300
   ### validates_format_of :name, :location, :with => /^[a-zA-Z0-9 !.,#\*<>@&:"$\-\\\/']*$/
 
-  
   before_save :add_event_times
 
   before_validation :check_invariants
@@ -131,6 +130,7 @@ class Event < ActiveRecord::Base
       old_date.strftime('%m/%d/%Y')
     end
   end
+  
 
   # Approval
   def approve_event
