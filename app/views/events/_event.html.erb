@@ -6,7 +6,7 @@
     <p class="event-desc"><%= event.description %></p>
 	<p class="event-organization"><%= event.organization.name %></p>
 	
-	<% if !event.url.nil? %>
+	<% if !event.url.nil? && !event.url.empty?%>
 		<%if event.url.start_with?('http://') || event.url.start_with?('https://')%>
 			<p class="event-url">Click <a href=<%= event.url %> >here</a> for event link.</p>
 		<% else %>
