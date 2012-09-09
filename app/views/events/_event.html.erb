@@ -5,6 +5,16 @@
     <p class="event-location"><%= event.location %></p>
     <p class="event-desc"><%= event.description %></p>
 	<p class="event-organization"><%= event.organization.name %></p>
+	
+	<% if !event.url.nil? %>
+		<%if event.url.start_with?('http://') || event.url.start_with?('https://')%>
+			<p class="event-url">Click <a href=<%= event.url %> >here</a> for event link.</p>
+		<% else %>
+			<p class="event-url">Click <a href=<%='http://' + event.url %> >here</a> for event link.</p>
+		<% end %>
+	<% else %>
+	<p class="event-url"></p>
+	<% end %>
   </div>
   
     <% if signed_in? and event.can_modify?(current_user) %>
