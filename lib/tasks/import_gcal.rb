@@ -29,7 +29,7 @@ result = client.execute(:api_method => service.events.list,
   event = Event.new
 event.name=cur_event["summary"]
 event.description = cur_event["description"]
-event.summary = "test"
+event.summary =  cur_event["description"]
 event.start_time=Time.parse(cur_event["start"]["dateTime"]).strftime("%Y-%d-%m %H:%M")
 event.end_time=Time.parse(cur_event["end"]["dateTime"]).strftime("%Y-%d-%m %H:%M")
 event.categories = "1" #CHANGE ME!
