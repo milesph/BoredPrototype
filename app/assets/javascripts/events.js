@@ -91,6 +91,8 @@ $(function() {
   $('li.catname-9').click(function(e){
 	  toggleonClick(9);
       });
+
+
 });
 
 $('.field input').focus(function(){
@@ -110,15 +112,6 @@ function buttonon(i) {
     $(".catname-" + (i).toString()).css('color', 'white');
 }
 
-function time_buttonoff(i) {
-    $(".time-" + (i).toString()).css('background-color', '');
-    $(".time-" + (i).toString()).css('color', 'inherit');
-}
-
-function time_buttonon(i) {
-    $(".time-" + (i).toString()).css('background-color', '#8C0F2E');
-    $(".time-" + (i).toString()).css('color', 'white');
-}
 
 
 // Initialize the page
@@ -152,22 +145,6 @@ function toggleonClick(i){
     }
 }
 
-// Toggle time button i, i >= 1
-function time_toggleonClick(i){
-    time_buttonoff(0);
-    refresh_cat();
-    cat = '.cat-' + (i).toString();
-    if ( $(cat).css('display') == "none" 
-	|| $(".catname-" + (i).toString()).css('color') != 'rgb(255, 255, 255)'){
-	buttonon(i);
-	show_cat(i);
-    } 
-    else{
-	buttonoff(i);
-	hide_cat(i);
-	refresh_cat();
-    }
-}
 
 
 // Toggling function for all events

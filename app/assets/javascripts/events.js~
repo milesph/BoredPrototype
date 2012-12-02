@@ -152,6 +152,23 @@ function toggleonClick(i){
     }
 }
 
+// Toggle time button i, i >= 1
+function time_toggleonClick(i){
+    time_buttonoff(0);
+    refresh_cat();
+    cat = '.cat-' + (i).toString();
+    if ( $(cat).css('display') == "none" 
+	|| $(".catname-" + (i).toString()).css('color') != 'rgb(255, 255, 255)'){
+	buttonon(i);
+	show_cat(i);
+    } 
+    else{
+	buttonoff(i);
+	hide_cat(i);
+	refresh_cat();
+    }
+}
+
 
 // Toggling function for all events
 function toggleAll() {	
