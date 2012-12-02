@@ -1,9 +1,7 @@
 <script>
 	var hashCategories = new Array();
-	var hashTimes = new Array();
 
 	hashCategories = <%= categories_javascript()%>;
-	hashTimes = <%= times_javascript()%>;
 </script>
 
 <div class="container">	

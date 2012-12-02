@@ -74,7 +74,7 @@ $event_expanded_zindex: 900;
 	
 }
 
-.category-list li:hover ul.sub {
+#category-list li:hover ul.sub {
 	text-align: left;
 	left:0px; 
 	top:31px; 
