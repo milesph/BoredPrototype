@@ -112,6 +112,16 @@ function buttonon(i) {
     $(".catname-" + (i).toString()).css('color', 'white');
 }
 
+function time_buttonoff(i) {
+    $(".time-" + (i).toString()).css('background-color', '');
+    $(".time-" + (i).toString()).css('color', 'inherit');
+}
+
+function time_buttonon(i) {
+    $(".time-" + (i).toString()).css('background-color', '#8C0F2E');
+    $(".time-" + (i).toString()).css('color', 'white');
+}
+
 
 
 // Initialize the page
@@ -123,7 +133,7 @@ function init() {
     	buttonoff(i);
     }
     for(i = 1; i <= hashTimes.length; i++) {
-    	buttonoff(i);
+    	time_buttonoff(i);
     }
     time_buttonon(0);
 }

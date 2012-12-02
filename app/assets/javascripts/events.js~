@@ -39,6 +39,7 @@ function updateInfo(node) {
   $('#info-location', infoBar).html($('.event-location', node).html());
   $('#info-date', infoBar).html($('.event-date', node).html());
   $('#info-organization', infoBar).html($('.event-organization', node).html());
+  $('#info-url', infoBar).html($('.event-url', node).html());
 }
 
 $(function() {
@@ -110,16 +111,6 @@ function buttonon(i) {
     $(".catname-" + (i).toString()).css('color', 'white');
 }
 
-function time_buttonoff(i) {
-    $(".time-" + (i).toString()).css('background-color', '');
-    $(".time-" + (i).toString()).css('color', 'inherit');
-}
-
-function time_buttonon(i) {
-    $(".time-" + (i).toString()).css('background-color', '#8C0F2E');
-    $(".time-" + (i).toString()).css('color', 'white');
-}
-
 
 // Initialize the page
 function init() {
@@ -129,32 +120,12 @@ function init() {
     for(i = 1; i <= hashCategories.length; i++) {
     	buttonoff(i);
     }
-    for(i = 1; i <= hashTimes.length; i++) {
-    	buttonoff(i);
-    }
-    time_buttonon(0);
+
 }
 
 // Toggle button i 
 function toggleonClick(i){
     buttonoff(0);
-    refresh_cat();
-    cat = '.cat-' + (i).toString();
-    if ( $(cat).css('display') == "none" 
-	|| $(".catname-" + (i).toString()).css('color') != 'rgb(255, 255, 255)'){
-	buttonon(i);
-	show_cat(i);
-    } 
-    else{
-	buttonoff(i);
-	hide_cat(i);
-	refresh_cat();
-    }
-}
-
-// Toggle time button i, i >= 1
-function time_toggleonClick(i){
-    time_buttonoff(0);
     refresh_cat();
     cat = '.cat-' + (i).toString();
     if ( $(cat).css('display') == "none" 
@@ -221,7 +192,7 @@ show_categories = [1,2,3,4]; //DELETE ME
 //  and hides all others.
 function show_only_cats(cats){
 	hide_all();
-	
+
 	for(var x in cats){
 		show_cat(x);
 	}

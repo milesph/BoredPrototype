@@ -22,8 +22,8 @@ module EventsHelper
   @@times_hash = {
   "All" => 0, 
   "Today" => 1,
-  "This Month" => 2,
-  "This Week" => 3,
+  "This Week" => 2,
+  "This Month" => 3,
   "This Year" => 4,
   }
 
